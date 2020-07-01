@@ -1,0 +1,8 @@
+arousal,valence,emodbEmotion,emodbEmotion_LABEL,abcAffect,abcAffect_LABEL
+3.580932e-01,1.974163e-01,0.000007,anger,0.066032,aggressiv
+,,0.000006,boredom,0.164758,cheerful
+,,0.027346,disgust,0.590632,intoxicated
+,,0.000001,fear,0.022913,nervous
+,,0.000007,happiness,0.116829,neutral
+,,0.000002,neutral,0.038837,tired
+,,0.972631,sadness,,
