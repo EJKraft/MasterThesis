@@ -1,6 +1,7 @@
 import csv
 from os import listdir
 import numpy as np
+import pandas as pd
 import sys
 
 input_folder = sys.argv[1]
@@ -10,7 +11,7 @@ input_folder = sys.argv[1]
 
 txt_files = listdir(input_folder)
 txt_files.sort()
-print('FILES' + str(txt_files))
+print('Processing ' + str(txt_files))
 
 #We want to iterate over the folder containing the txt data and write to csv
 for i in range(0,len(txt_files)):
@@ -36,3 +37,22 @@ for i in range(0,len(txt_files)):
         aff = aff_temp[1].split("::")
         affect = [a[a.index(":") + 1:] for a in aff]
         affect[len(affect)-1] = affect[len(affect)-1][:8]
+        df_ar = pd.DataFrame([arousal])
+        df_ar.columns = ['arousal']
+        df_val = pd.DataFrame([valence])
+        df_val.columns = ['valence']
+        df_emo = pd.DataFrame([emotion])
+        df_emo = df_emo.transpose()
+        df_emo.columns = ['emodbEmotion']
+        df_aff = pd.DataFrame([affect])
+        df_aff = df_aff.transpose()
+        df_aff.columns = ['abcAffect']
+        data = pd.concat([df_emo, df_aff],ignore_index = True, axis = 1)
+        data = pd.concat([data, df_ar], ignore_index = True, axis = 1)
+        data = pd.concat([data, df_val], ignore_index = True, axis = 1)
+        data.columns = ['emodbEmotion', 'abcAffect', 'arousal', 'valence']
+
+        #d = {'arousal': arousal, 'valence': valence, 'abcAffect': affect, 'emodbEmotion': emotion}
+        #df_data = pd.DataFrame(data=d)
+        print(data)
+        data.to_csv(txt_files[i][:-4] + '.csv',index = False)
