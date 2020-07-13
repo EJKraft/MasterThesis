@@ -11,12 +11,12 @@ input_folder = sys.argv[1]
 
 txt_files = listdir(input_folder)
 txt_files.sort()
-print('Processing ' + str(txt_files))
 
 #We want to iterate over the folder containing the txt data and write to csv
 for i in range(0,len(txt_files)):
     #load txt file
     with open(input_folder + txt_files[i], 'r') as data:
+        print('Processing file ' + txt_files[i] + ' ...')
         lines = data.readlines()
         #first we want to read arousal 
         ar_line = lines[1]
@@ -37,6 +37,15 @@ for i in range(0,len(txt_files)):
         aff = aff_temp[1].split("::")
         affect = [a[a.index(":") + 1:] for a in aff]
         affect[len(affect)-1] = affect[len(affect)-1][:8]
+        
+        #Now look at Level of Interest
+        loi_line = lines[6]
+        loi_temp = loi_line.split(";",1)
+        loi = loi_temp[1].split("::")
+        loi = [l[l.index(":") + 1:] for l in loi]
+        loi[len(loi)-1] = loi[len(loi)-1][:8]
+
+        #Make them to panda data frames
         df_ar = pd.DataFrame([arousal])
         df_ar.columns = ['arousal']
         df_val = pd.DataFrame([valence])
@@ -47,12 +56,14 @@ for i in range(0,len(txt_files)):
         df_aff = pd.DataFrame([affect])
         df_aff = df_aff.transpose()
         df_aff.columns = ['abcAffect']
+        df_loi = pd.DataFrame([loi])
+        df_loi = df_loi.transpose()
+        df_loi.columns = ['avicLoI']
         data = pd.concat([df_emo, df_aff],ignore_index = True, axis = 1)
         data = pd.concat([data, df_ar], ignore_index = True, axis = 1)
         data = pd.concat([data, df_val], ignore_index = True, axis = 1)
-        data.columns = ['emodbEmotion', 'abcAffect', 'arousal', 'valence']
+        data = pd.concat([data, df_loi], ignore_index = True, axis = 1)
+        data.columns = ['emodbEmotion', 'abcAffect', 'arousal', 'valence', 'avicLoI']
 
-        #d = {'arousal': arousal, 'valence': valence, 'abcAffect': affect, 'emodbEmotion': emotion}
-        #df_data = pd.DataFrame(data=d)
         print(data)
         data.to_csv(txt_files[i][:-4] + '.csv',index = False)
