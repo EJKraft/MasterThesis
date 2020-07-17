@@ -1,5 +1,5 @@
 numpy
 pandas
-os
+os.listdir
 matplotlib.pyplot
 scipy.stats
