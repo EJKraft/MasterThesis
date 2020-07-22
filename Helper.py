@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
@@ -14,3 +15,59 @@ def correlation(data1, data2):
 	res = data1.corr(data2)
 	print('Correlation between ' + str(data1.name) + ' and ' + str(data2.name) + ': ' + str(res))
 	return res
+
+def cleanData(data, column_name, column_value):
+	res = data.loc[data[column_name]==column_value]
+	res = res.drop(['CharacterID','file', 'Age', 'Sex', 'Academic Status'], axis = 1)
+	return res
+		
+def calcFrequencyTable(data, voice_feature, char_feature):
+	if(voice_feature == 0):
+		fre_table = pd.DataFrame(columns = ['anger', 'boredom', 'disgust', 'fear', 'happiness', 'neutral', 'sadness'])
+	elif(voice_feature == 1):
+		fre_table = pd.DataFrame(columns = ['aggressive', 'cheerful', 'intoxicated', 'nervous', 'neutral', 'tired'])
+	elif(voice_feature == 2):
+		fre_table = pd.DataFrame(columns = ['arousal', 'valence'])
+	elif(voice_feature == 3):
+		fre_table = pd.DataFrame(columns = ['disinterest', 'normal', 'high interest'])
+	else:
+		print('Did not provide correct number for variable voice_feature! Use 0 for emotion, 1 for affect, 2 for arousal/valence and 3 for interest!')
+	
+	#0 stands for sex
+	if(char_feature == 0):
+		maxValueIndex_male = data[0].idxmax(axis = 1)
+		max_ValueIndex_female = data[1].idxmax(axis = 1)			
+		temp_male = maxValueIndex_male.value_counts()
+		temp_female = max_ValueIndex_female.value_counts()
+		
+		fre_table = fre_table.append(temp_male, ignore_index = True)
+		fre_table = fre_table.append(temp_female, ignore_index = True)
+		
+	# 1 stands for academic status. For now it is two dimensional as sex, but that may change depending on the final data set. That's why it's seperate..
+	elif(char_feature == 1):
+		maxValueIndex_bach = data[0].idxmax(axis = 1)
+		max_ValueIndex_mast = data[1].idxmax(axis = 1)			
+		temp_bach = maxValueIndex_bach.value_counts()
+		temp_mast = max_ValueIndex_mast.value_counts()
+		
+		fre_table = fre_table.append(temp_bach, ignore_index = True)
+		fre_table = fre_table.append(temp_mast, ignore_index = True)
+		
+	# 2 stands for age
+	elif(char_feature == 2):
+		maxValueIndex_young = data[0].idxmax(axis = 1)
+		maxValueIndex_middle = data[1].idxmax(axis = 1)
+		maxValueIndex_old = data[2].idxmax(axis = 1)
+		temp_young = maxValueIndex_young.value_counts()
+		temp_middle = maxValueIndex_middle.value_counts()
+		temp_old = maxValueIndex_old.value_counts()
+		
+		fre_table = fre_table.append(temp_young, ignore_index = True)
+		fre_table = fre_table.append(temp_middle, ignore_index = True)
+		fre_table = fre_table.append(temp_old, ignore_index = True)
+		
+	fre_table = fre_table.fillna(0)
+	return fre_table
+			
+		
+	
