@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+import itertools as it
+from statsmodels.sandbox.stats.multicomp import multipletests
+import scipy.stats as st
 
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
@@ -20,6 +23,21 @@ def cleanData(data, column_name, column_value):
 	res = data.loc[data[column_name]==column_value]
 	res = res.drop(['CharacterID','file', 'Age', 'Sex', 'Academic Status'], axis = 1)
 	return res
+	
+def chi2_post_hoc(fre_table, method, shouldPrint= False):
+	all_combis = list(it.combinations(fre_table.index,2))
+	p_vals = []
+	for comb in all_combis:
+		#Create new data frame from combinations to conduct chi2 independence test
+		new_df = fre_table[(fre_table.index == comb[0]) | (fre_table.index == comb[1])]
+		chi2_ph = st.chi2_contingency(new_df, correction = True)
+		p_vals.append(chi2_ph[1])
+	reject_list, corrected_p_vals = multipletests(p_vals, method = method)[:2]
+	if(shouldPrint == True):
+		print('Combinations: ' + str(all_combis))
+		print('Reject List: ' + str(reject_list))
+		print('Corrected p-values: ' + str(corrected_p_vals))
+	return [reject_list, corrected_p_vals, all_combis]
 		
 def calcFrequencyTable(data, voice_feature, char_feature):
 	if(voice_feature == 0):
