@@ -1,0 +1,34 @@
+[ 27.07.2020 - 14:03:30 ]
+    (MSG) [2] in SMILExtract : openSMILE starting!
+[ 27.07.2020 - 14:03:30 ]
+    (MSG) [2] in SMILExtract : config file is: /home/emma/opensmile-2.3.0/config/emobase_live4_batch_single.conf
+[ 27.07.2020 - 14:03:30 ]
+    (MSG) [2] in cComponentManager : successfully registered 96 component types.
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : non-existant field 'isLibLinearModel[0]' (-1)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : index -1 out of bounds (0-26)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : non-existant field 'isLibLinearModel[0]' (-1)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : index -1 out of bounds (0-26)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : non-existant field 'isLibLinearModel[0]' (-1)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : index -1 out of bounds (0-26)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : non-existant field 'isLibLinearModel[0]' (-1)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : index -1 out of bounds (0-26)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : non-existant field 'isLibLinearModel[0]' (-1)
+[ 27.07.2020 - 14:03:30 ]
+    (WARN) [2] in configManager : ConfigInstance::getValue : index -1 out of bounds (0-26)
+[ 27.07.2020 - 14:03:30 ]
+    (MSG) [2] in instance 'arffsink' : writing ARFF header (988 features)...
+[ 27.07.2020 - 14:03:30 ]
+    (MSG) [2] in instance 'arousal' : loading LibSVM model(s) ...
+[ 27.07.2020 - 14:03:30 ]
+    (ERROR) [1] in cLibsvmLiveSink : svmModelWrapper: can't open LibSVM model file 'models/emo/sal_aro.emobase.model'
+[ 27.07.2020 - 14:03:30 ]
+    (ERROR) [1] in cLibsvmLiveSink : failed loading model 0 (file: 'models/emo/sal_aro.emobase.model')
