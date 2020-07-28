@@ -3,6 +3,8 @@ import pandas as pd
 import itertools as it
 from statsmodels.sandbox.stats.multicomp import multipletests
 import scipy.stats as st
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
@@ -23,6 +25,26 @@ def cleanData(data, column_name, column_value):
 	res = data.loc[data[column_name]==column_value]
 	res = res.drop(['CharacterID','file', 'Age', 'Sex', 'Academic Status'], axis = 1)
 	return res
+
+	#type = emotion, level of interest, affect
+	#kind = kind for sns.catplot
+	#char_feature = Sex/ Academic Status/ Age
+def catPlot(data, type, char_feature, kind):
+	if(char_feature == 'Sex'):
+		data_melt = data.Sex.replace({0.0: "male", 1.0: "female"}, inplace = True)	
+	elif(char_feature == 'Academic Status'):
+		data_melt = data[char_feature].replace({0.0: "Bachelor", 1.0: "Master"}, inplace = True)
+	elif(char_feature == 'Age'):
+		data_melt = data[char_feature].replace({23: "Young", 24: "Middle", 25: "Old"}, inplace = True)
+	data_melt = data.melt(var_name = type, value_name = 'Probability of ' + type, id_vars = char_feature)
+	sns.catplot(x = type, y = 'Probability of ' + type, hue = char_feature, kind = kind, data = data_melt)
+	return
+
+def distPlots(data, features):
+	for f in features:
+		plt.figure(f)
+		sns.kdeplot(data[f], shade = True)
+	return
 	
 def chi2_post_hoc(fre_table, method, shouldPrint= False):
 	all_combis = list(it.combinations(fre_table.index,2))
@@ -87,5 +109,3 @@ def calcFrequencyTable(data, voice_feature, char_feature):
 	fre_table = fre_table.fillna(0)
 	return fre_table
 			
-		
-	
