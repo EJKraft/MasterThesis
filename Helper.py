@@ -5,6 +5,7 @@ from statsmodels.sandbox.stats.multicomp import multipletests
 import scipy.stats as st
 import seaborn as sns
 import matplotlib.pyplot as plt
+import statsmodels.api as sm
 
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
@@ -46,21 +47,33 @@ def distPlots(data, features):
 		sns.kdeplot(data[f], shade = True)
 	return
 	
-def chi2_post_hoc(fre_table, method, shouldPrint= False):
+def chi2_post_hoc(fre_table, method, shouldPrint= False, calculateResiduals = False):
 	all_combis = list(it.combinations(fre_table.index,2))
 	p_vals = []
+	res = []
 	for comb in all_combis:
 		#Create new data frame from combinations to conduct chi2 independence test
 		new_df = fre_table[(fre_table.index == comb[0]) | (fre_table.index == comb[1])]
+		#Calculate residuals if needed
+		if(calculateResiduals == True):
+			new_table = sm.stats.Table(new_df)
+			new_res = new_table.standardized_resids
 		chi2_ph = st.chi2_contingency(new_df, correction = True)
 		p_vals.append(chi2_ph[1])
+		if(calculateResiduals == True):
+			res.append(new_res)
 	reject_list, corrected_p_vals = multipletests(p_vals, method = method)[:2]
 	if(shouldPrint == True):
 		print('Combinations: ' + str(all_combis))
 		print('Reject List: ' + str(reject_list))
 		print('Corrected p-values: ' + str(corrected_p_vals))
-	return [reject_list, corrected_p_vals, all_combis]
-		
+	if(calculateResiduals == False):
+		return [reject_list, corrected_p_vals, all_combis]
+	
+	else:
+		return [reject_list, corrected_p_vals, all_combis, res ]
+
+# Converts a panda data frame containing decimal values to frequency tables so that the largest number for a row is counted as a frequency of e.g. the emotion anger
 def calcFrequencyTable(data, voice_feature, char_feature):
 	if(voice_feature == 0):
 		fre_table = pd.DataFrame(columns = ['anger', 'boredom', 'disgust', 'fear', 'happiness', 'neutral', 'sadness'])
