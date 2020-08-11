@@ -7,6 +7,88 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
+def constructDataFrames(filenames):
+	arousal = []
+	valence = []
+	emotion = []
+	affect = []
+	loi = []
+	characterIDs = []
+	
+	fnames = []
+	filenames.sort()
+	#filenames contains the hole path, not only the filenames
+	for x in filenames:
+		fnames.append([x])
+		
+	emotion_label = ['anger', 'boredom', 'disgust', 'fear', 'happiness', 'neutral', 'sadness']
+	affect_label = ['aggressiv', 'cheerful', 'intoxicated', 'nervous', 'neutral', 'tired']
+	loi_label = ['disinterest', 'normal', 'high interest']
+		
+	# Now iterate over our filenames, load the data and save it to a list for further usage
+	for i in range(len(fnames)):
+		 # data contains all information (arousal, valence, emotion, affect) and we want to save the values of all files in a list
+		data = pd.read_csv("OpenSMILE_Data/" + filenames[i])    
+
+		# For arousal, valence and affect we have to drop nans, since they have less values than emotion
+		temp_arousal = data['arousal']
+		temp_arousal = temp_arousal.dropna()
+		temp_valence = data['valence'] 
+		temp_valence = temp_valence.dropna()
+		temp_affect = data['abcAffect']
+		temp_affect = temp_affect.dropna()
+		temp_emotion = data['emodbEmotion']
+		temp_loi = data['avicLoI']
+		temp_loi = temp_loi.dropna()
+		characterIDs.append(fnames[i][0][0])
+		
+		#Append the temp values to 'global lists'
+		emotion.append(temp_emotion.values.tolist())
+		affect.append(temp_affect.values.tolist())
+		valence.append(temp_valence.values)
+		arousal.append(temp_arousal.values)
+		loi.append(temp_loi.values)
+	
+	#We want to have the labels as column seperators and the filenames as ID 
+	#We want to do this, so that if we add more files (at the moment only 6 .csv files are loaded) we want to add rows and not columns
+	#If we plot the data, emotion_label can be used as label
+	df_emotion = pd.DataFrame.from_records(emotion)
+	df_emotion.columns = emotion_label
+	df_emotion['CharacterID'] = characterIDs
+	df_emotion['file'] = filenames
+
+	#Now do the same for affect
+	df_affect = pd.DataFrame.from_records(affect)
+	df_affect.columns = affect_label
+	df_affect['CharacterID'] = characterIDs
+	df_affect['file'] = filenames
+
+	#Now for loi
+	df_loi = pd.DataFrame.from_records(loi)
+	df_loi.columns = loi_label
+	df_loi['CharacterID'] = characterIDs
+	df_loi['file'] = filenames
+
+	#For Arousal and Valence, we want to combine these two features so that we can draw a scatter plot in the arousal valence space
+	np_ar = np.array(arousal).ravel()
+	np_val = np.array(valence).ravel()
+	np_ar_val = np.array([np_ar, np_val])
+
+	#Transpose Matrix so that it is in the same form as affect and emotion (columns = arousal, valence, ID = Filename)
+	df_ar_val = pd.DataFrame.from_records(np_ar_val.T)
+	#df_ar_val.index = filenames
+	df_ar_val.columns = ['valence', 'arousal']
+	df_ar_val['CharacterID'] = characterIDs
+	df_ar_val['file'] = filenames
+	
+	#We want to use the dataframes and labels so we construct us a multidimensional list which we'll return 
+	# First start with the labels
+	labels = [emotion_label, affect_label, loi_label, characterIDs]
+	#The with the data frames
+	data_frames = [df_emotion, df_affect, df_loi, df_ar_val]
+	return [data_frames, labels]	
+	
+
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
 	dof = n1 + n2 - 2
@@ -31,6 +113,25 @@ def cleanData(data, column_name, column_value):
 	#kind = kind for sns.catplot
 	#char_feature = Sex/ Academic Status/ Age
 def catPlot(data, type, char_feature, kind):
+	data_melt = meltData(data, char_feature, type)
+	g = sns.catplot(x = type, y = 'Probability of ' + type, hue = char_feature, kind = kind, data = data_melt)
+	plt.subplots_adjust(top = 0.9)
+	g.fig.suptitle(kind + ' plot of OpenEAR: ' + type)
+	return
+	
+def boxPlots(data, char_feature, types):
+	for i in range(0,3):
+		boxPlot(data[i], char_feature, types[i])
+		plt.figure()
+	return
+	
+def boxPlot(data, char_feature,type):
+	data_melt = meltData(data, char_feature,type)	
+	ax = sns.boxplot(x = type, y = 'Probability of ' + type, hue = char_feature, data = data_melt)
+	ax.set_title('Box Plot of OpenEAR: ' + type)
+	return	
+
+def meltData(data, char_feature, type):
 	if(char_feature == 'Sex'):
 		data_melt = data.Sex.replace({0.0: "male", 1.0: "female"}, inplace = True)	
 	elif(char_feature == 'Academic Status'):
@@ -38,12 +139,21 @@ def catPlot(data, type, char_feature, kind):
 	elif(char_feature == 'Age'):
 		data_melt = data[char_feature].replace({23: "Young", 24: "Middle", 25: "Old"}, inplace = True)
 	data_melt = data.melt(var_name = type, value_name = 'Probability of ' + type, id_vars = char_feature)
-	sns.catplot(x = type, y = 'Probability of ' + type, hue = char_feature, kind = kind, data = data_melt)
-	return
+	return data_melt
+	
+def distPlots(data, features, type):
 
-def distPlots(data, features):
+	if(type == 0):
+		feat = 'Emotion'
+	elif(type == 1):
+		feat = 'Affect'
+	elif(type == 2):
+		feat = 'Level of Interest'
+	else:
+		print('Enter 0 for emotion, 1 for affect or 2 for loi!')
 	for f in features:
-		plt.figure(f)
+		plt.figure()
+		plt.title('Distribution of OpenEAR: ' + feat + ' ' + f)
 		sns.kdeplot(data[f], shade = True)
 	return
 	
