@@ -99,6 +99,15 @@ def cohen_d(data1, data2):
 	print('Cohen d: ' + str(res))
 	return res
 	
+def correlations(dataset, data, label):
+	cors = []
+	coh_d = []
+	for x in label:
+		c = correlation(dataset, data[x])
+		cors.append(c)
+		d = cohen_d(dataset, data[x])
+	return [cors, coh_d]
+	
 def correlation(data1, data2):
 	res = data1.corr(data2)
 	print('Correlation between ' + str(data1.name) + ' and ' + str(data2.name) + ': ' + str(res))
