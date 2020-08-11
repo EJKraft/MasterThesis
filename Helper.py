@@ -157,6 +157,43 @@ def distPlots(data, features, type):
 		sns.kdeplot(data[f], shade = True)
 	return
 	
+def chi2(data, char_feature, type, shouldPrint = False):
+	if(type == 0):
+		feature = 'Emotion'
+	elif(type == 1):
+		feature = 'Affect'
+	elif(type == 2):
+		feature = 'Arousal Valence'
+	elif(type == 3):
+		feature = 'Level of Interest'
+	if(char_feature == 'Sex' or char_feature == 'Academic Status'):
+		df_data_group0 = cleanData(data, char_feature, 0)
+		df_data_group1 = cleanData(data, char_feature, 1)
+		if(char_feature == 'Sex'):
+			# Last zero stands for char_feature = Sex
+			fre_table = calcFrequencyTable([df_data_group0,df_data_group1],type, 0 )
+			fre_table.index = ['Male', 'Female']
+		elif(char_feature == 'Academic Status'):
+			fre_table = calcFrequencyTable([df_data_group0,df_data_group1],type, 1 )
+			fre_table.index = ['Bachelor', 'Master']
+	elif(char_feature == 'Age'):
+		df_data_group0 = cleanData(data, char_feature, 23)
+		df_data_group1 = cleanData(data, char_feature, 24)
+		df_data_group2 = cleanData(data, char_feature, 25)
+		fre_table = calcFrequencyTable([df_data_group0,df_data_group1, df_data_group2], type, 2)
+		fre_table.index = ['Young', 'Middle', 'Old']
+		
+	# ################
+	# This line will be deleted once real data is inserted!!!!
+	# ########
+	fre_table += 5
+	chi2 = st.chi2_contingency(fre_table)
+	if(shouldPrint == True):
+		print('Chi square of ' + feature + ' : ' + str(chi2[0]) + ' with p-value of: ' + str(chi2[1]))
+	table = sm.stats.Table(fre_table)
+	residuals = table.standardized_resids
+	return [chi2, fre_table, residuals]
+
 def chi2_post_hoc(fre_table, method, shouldPrint= False, calculateResiduals = False):
 	all_combis = list(it.combinations(fre_table.index,2))
 	p_vals = []
