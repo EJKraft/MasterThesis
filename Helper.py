@@ -6,6 +6,7 @@ import scipy.stats as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
+import statsmodels.formula.api as smf
 
 def constructDataFrames(filenames):
 	arousal = []
@@ -277,4 +278,37 @@ def calcFrequencyTable(data, voice_feature, char_feature):
 		
 	fre_table = fre_table.fillna(0)
 	return fre_table
-			
+	
+def logReg(data, voice_feature, char_feature, specificVoiceF):
+	d = data[[char_feature, specificVoiceF]]
+	f = char_feature + ' ~ ' + specificVoiceF
+	model = smf.logit(formula = f, data = d)
+	res = model.fit()
+	return res
+
+	
+def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
+	if(char_feature == 'Sex'):
+		d = data.drop(['CharacterID', 'file', 'Age', 'Academic Status'], axis = 1)
+	elif(char_feature == 'Academic Status'):
+		d = data.drop(['CharacterID', 'file', 'Age', 'Sex'], axis = 1)
+	elif(char_feature == 'Age'):
+		d = data.drop(['CharacterID', 'file', 'Sex', 'Academic Status'], axis = 1)
+	f = char_feature
+	if(voice_feature == 'Emotion'):
+		f += ' ~ anger + boredom + disgust + fear + happiness + neutral + sadness'
+	elif(voice_feature == 'Affect'):
+		f += ' ~ aggressiv + cheerful + intoxicated + nervous + neutral + tired'
+	elif(voice_feature == 'LOI'):
+		f += ' ~ disinterest + normal + high interest'
+	elif(voice_feature == 'Arousal-Valence'):
+		f += ' ~ arousal + valence'
+	else:
+		print('Enter valid voice feature: Emotion, Affect, LOI, Arousal-Valence!')
+
+		
+	model = smf.logit(formula = f, data = d)
+	if(prohibitWarning == True):
+		model.raise_on_perfect_prediction = False
+	res = model.fit()
+	return res
