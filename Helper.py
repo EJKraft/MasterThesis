@@ -89,7 +89,6 @@ def constructDataFrames(filenames):
 	data_frames = [df_emotion, df_affect, df_loi, df_ar_val]
 	return [data_frames, labels]	
 	
-
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
 	dof = n1 + n2 - 2
@@ -289,18 +288,22 @@ def logReg(data, voice_feature, char_feature, specificVoiceF):
 	
 def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	if(char_feature == 'Sex'):
-		d = data.drop(['CharacterID', 'file', 'Age', 'Academic Status'], axis = 1)
-	elif(char_feature == 'Academic Status'):
+		d = data.drop(['CharacterID', 'file', 'Age', 'Academic'], axis = 1)
+	elif(char_feature == 'Academic'):
 		d = data.drop(['CharacterID', 'file', 'Age', 'Sex'], axis = 1)
 	elif(char_feature == 'Age'):
-		d = data.drop(['CharacterID', 'file', 'Sex', 'Academic Status'], axis = 1)
+		d = data.drop(['CharacterID', 'file', 'Sex', 'Academic'], axis = 1)
+	else:
+		print('Either use Sex, Academic or Age as input for character feature')
+	
 	f = char_feature
+	
 	if(voice_feature == 'Emotion'):
 		f += ' ~ anger + boredom + disgust + fear + happiness + neutral + sadness'
 	elif(voice_feature == 'Affect'):
 		f += ' ~ aggressiv + cheerful + intoxicated + nervous + neutral + tired'
 	elif(voice_feature == 'LOI'):
-		f += ' ~ disinterest + normal + high interest'
+		f += ' ~ disinterest + normal + high_Interest'
 	elif(voice_feature == 'Arousal-Valence'):
 		f += ' ~ arousal + valence'
 	else:
