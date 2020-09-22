@@ -18,6 +18,8 @@ def createMeanDataFrame(data, type, label):
 		 res = pd.DataFrame({'Master Student': r[0], 'PhD Student': r[1], 'Researcher': r[2], 'Professor': r[3], 'Assistant Professor': r[4], 'Post Doc': r[5]}, index = label)
 	elif(type == 'Age'):
 		res = pd.DataFrame({'Young': r[0], 'Intermediate': r[1], 'Old': r[2]}, index = label)
+	elif(type == 'Sex'):
+		res = pd.DataFrame({'Male': r[0], 'Female': r[1]})
 	else:
 		res = 0
 	return res		
@@ -52,7 +54,7 @@ def correlation(data1, data2):
 
 def cleanData(data, column_name, column_value):
 	res = data.loc[data[column_name]==column_value]
-	res = res.drop(['CharacterID','file', 'Age', 'Sex', 'Academic Status'], axis = 1)
+	res = res.drop(['ID','Char_ID','Filename', 'Age', 'Sex', 'Academic Status'], axis = 1)
 	return res
 
 	#type = emotion, level of interest, affect
@@ -228,24 +230,25 @@ def logReg(data, voice_feature, char_feature, specificVoiceF):
 	
 def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	if(char_feature == 'Sex'):
-		d = data.drop(['CharacterID', 'file', 'Age', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID','ID','Name','VideoTitle', 'Filename', 'Age', 'Academic'], axis = 1)
+		d.Sex.replace({'Male': 0.0, 'Female':1.0}, inplace = True)
 	elif(char_feature == 'Academic'):
-		d = data.drop(['CharacterID', 'file', 'Age', 'Sex'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle', 'Age', 'Sex'], axis = 1)
 	elif(char_feature == 'Age'):
-		d = data.drop(['CharacterID', 'file', 'Sex', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle','Sex', 'Academic'], axis = 1)
 	else:
 		print('Either use Sex, Academic or Age as input for character feature')
 	
 	f = char_feature
 	
 	if(voice_feature == 'Emotion'):
-		f += ' ~ anger + boredom + disgust + fear + happiness + neutral + sadness'
+		f += ' ~ Anger + Boredom + Disgust + Fear + Happiness + Emo_Neutral + Sadness'
 	elif(voice_feature == 'Affect'):
-		f += ' ~ aggressiv + cheerful + intoxicated + nervous + neutral + tired'
+		f += ' ~ Aggressiv + Cheerful + Intoxicated + Nervous + Aff_Neutral + Tired'
 	elif(voice_feature == 'LOI'):
-		f += ' ~ disinterest + normal + high_Interest'
+		f += ' ~ Disinterest + Normal + High_Interest'
 	elif(voice_feature == 'Arousal-Valence'):
-		f += ' ~ arousal + valence'
+		f += ' ~ Arousal + Valence'
 	else:
 		print('Enter valid voice feature: Emotion, Affect, LOI, Arousal-Valence!')
 
@@ -257,24 +260,22 @@ def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	return res
 	
 def multiNomiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
-	data.Age.replace({23: "Young", 24: "Intermediate", 25: "Old"}, inplace = True)
-	if(char_feature == 'Sex'):
-		d = data.drop(['CharacterID', 'file', 'Age', 'Academic'], axis = 1)
-	elif(char_feature == 'Academic'):
-		d = data.drop(['CharacterID', 'file', 'Age', 'Sex'], axis = 1)
+	
+	if(char_feature == 'Academic'):
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle', 'Age', 'Sex'], axis = 1)
 	elif(char_feature == 'Age'):
-		d = data.drop(['CharacterID', 'file', 'Sex', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle','Sex', 'Academic'], axis = 1)
 	else:
 		print('Either use Sex, Academic or Age as input for character feature')
 	f = char_feature
 	if(voice_feature == 'Emotion'):
-		f += ' ~ anger + boredom + disgust + fear + happiness + neutral + sadness'
+		f += ' ~ Anger + Boredom + Disgust + Fear + Happiness + Emo_Neutral + Sadness'
 	elif(voice_feature == 'Affect'):
-		f += ' ~ aggressiv + cheerful + intoxicated + nervous + neutral + tired'
+		f += ' ~ Aggressiv + Cheerful + Intoxicated + Nervous + Aff_Neutral + Tired'
 	elif(voice_feature == 'LOI'):
-		f += ' ~ disinterest + normal + high_Interest'
+		f += ' ~ Disinterest + Normal + High_Interest'
 	elif(voice_feature == 'Arousal-Valence'):
-		f += ' ~ arousal + valence'
+		f += ' ~ Arousal + Valence'
 	else:
 		print('Enter valid voice feature: Emotion, Affect, LOI, Arousal-Valence!')
 	mdl = smf.MNLogit.from_formula(f,d)
