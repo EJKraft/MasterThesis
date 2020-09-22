@@ -8,86 +8,23 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
-def constructDataFrames(filenames):
-	arousal = []
-	valence = []
-	emotion = []
-	affect = []
-	loi = []
-	characterIDs = []
-	
-	fnames = []
-	filenames.sort()
-	#filenames contains the hole path, not only the filenames
-	for x in filenames:
-		fnames.append([x])
-		
-	emotion_label = ['anger', 'boredom', 'disgust', 'fear', 'happiness', 'neutral', 'sadness']
-	affect_label = ['aggressiv', 'cheerful', 'intoxicated', 'nervous', 'neutral', 'tired']
-	loi_label = ['disinterest', 'normal', 'high interest']
-		
-	# Now iterate over our filenames, load the data and save it to a list for further usage
-	for i in range(len(fnames)):
-		 # data contains all information (arousal, valence, emotion, affect) and we want to save the values of all files in a list
-		data = pd.read_csv("OpenSMILE_Data/" + filenames[i])    
+def createMeanDataFrame(data, type, label):
+	r = []
+	for d in data:
+		d = dropCharacterCols(d)
+		d = d.mean()
+		r.append(d)
+	if(type == 'Academic'):
+		 res = pd.DataFrame({'Master Student': r[0], 'PhD Student': r[1], 'Researcher': r[2], 'Professor': r[3], 'Assistant Professor': r[4], 'Post Doc': r[5]}, index = label)
+	elif(type == 'Age'):
+		res = pd.DataFrame({'Young': r[0], 'Intermediate': r[1], 'Old': r[2]}, index = label)
+	else:
+		res = 0
+	return res		
 
-		# For arousal, valence and affect we have to drop nans, since they have less values than emotion
-		temp_arousal = data['arousal']
-		temp_arousal = temp_arousal.dropna()
-		temp_valence = data['valence'] 
-		temp_valence = temp_valence.dropna()
-		temp_affect = data['abcAffect']
-		temp_affect = temp_affect.dropna()
-		temp_emotion = data['emodbEmotion']
-		temp_loi = data['avicLoI']
-		temp_loi = temp_loi.dropna()
-		characterIDs.append(fnames[i][0][0])
-		
-		#Append the temp values to 'global lists'
-		emotion.append(temp_emotion.values.tolist())
-		affect.append(temp_affect.values.tolist())
-		valence.append(temp_valence.values)
-		arousal.append(temp_arousal.values)
-		loi.append(temp_loi.values)
-	
-	#We want to have the labels as column seperators and the filenames as ID 
-	#We want to do this, so that if we add more files (at the moment only 6 .csv files are loaded) we want to add rows and not columns
-	#If we plot the data, emotion_label can be used as label
-	df_emotion = pd.DataFrame.from_records(emotion)
-	df_emotion.columns = emotion_label
-	df_emotion['CharacterID'] = characterIDs
-	df_emotion['file'] = filenames
-
-	#Now do the same for affect
-	df_affect = pd.DataFrame.from_records(affect)
-	df_affect.columns = affect_label
-	df_affect['CharacterID'] = characterIDs
-	df_affect['file'] = filenames
-
-	#Now for loi
-	df_loi = pd.DataFrame.from_records(loi)
-	df_loi.columns = loi_label
-	df_loi['CharacterID'] = characterIDs
-	df_loi['file'] = filenames
-
-	#For Arousal and Valence, we want to combine these two features so that we can draw a scatter plot in the arousal valence space
-	np_ar = np.array(arousal).ravel()
-	np_val = np.array(valence).ravel()
-	np_ar_val = np.array([np_ar, np_val])
-
-	#Transpose Matrix so that it is in the same form as affect and emotion (columns = arousal, valence, ID = Filename)
-	df_ar_val = pd.DataFrame.from_records(np_ar_val.T)
-	#df_ar_val.index = filenames
-	df_ar_val.columns = ['valence', 'arousal']
-	df_ar_val['CharacterID'] = characterIDs
-	df_ar_val['file'] = filenames
-	
-	#We want to use the dataframes and labels so we construct us a multidimensional list which we'll return 
-	# First start with the labels
-	labels = [emotion_label, affect_label, loi_label, characterIDs]
-	#The with the data frames
-	data_frames = [df_emotion, df_affect, df_loi, df_ar_val]
-	return [data_frames, labels]	
+def dropCharacterCols(data):
+	res = data.drop(['Char_ID','ID','Filename', 'Age', 'Sex', 'Academic Status', 'VideoTitle', 'Name'], axis = 1)
+	return res
 	
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
@@ -123,15 +60,18 @@ def cleanData(data, column_name, column_value):
 	#char_feature = Sex/ Academic Status/ Age
 def catPlot(data, type, char_feature, kind):
 	data_melt = meltData(data, char_feature, type)
-	g = sns.catplot(x = type, y = 'Probability of ' + type, hue = char_feature, kind = kind, data = data_melt)
+	g = sns.catplot(x = type, y = 'Probability of ' + type, hue = char_feature, kind = kind, data = data_melt)	
 	plt.subplots_adjust(top = 0.9)
 	g.fig.suptitle(kind + ' plot of OpenEAR: ' + type)
+	plt.xticks(rotation = 20)
 	return
 	
 def boxPlots(data, char_feature, types):
 	for i in range(0,3):
+		plt.xticks(rotation=20)
 		boxPlot(data[i], char_feature, types[i])
 		plt.figure()
+		
 	return
 	
 def boxPlot(data, char_feature,type):
@@ -315,3 +255,54 @@ def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 		model.raise_on_perfect_prediction = False
 	res = model.fit()
 	return res
+	
+def multiNomiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
+	data.Age.replace({23: "Young", 24: "Intermediate", 25: "Old"}, inplace = True)
+	if(char_feature == 'Sex'):
+		d = data.drop(['CharacterID', 'file', 'Age', 'Academic'], axis = 1)
+	elif(char_feature == 'Academic'):
+		d = data.drop(['CharacterID', 'file', 'Age', 'Sex'], axis = 1)
+	elif(char_feature == 'Age'):
+		d = data.drop(['CharacterID', 'file', 'Sex', 'Academic'], axis = 1)
+	else:
+		print('Either use Sex, Academic or Age as input for character feature')
+	f = char_feature
+	if(voice_feature == 'Emotion'):
+		f += ' ~ anger + boredom + disgust + fear + happiness + neutral + sadness'
+	elif(voice_feature == 'Affect'):
+		f += ' ~ aggressiv + cheerful + intoxicated + nervous + neutral + tired'
+	elif(voice_feature == 'LOI'):
+		f += ' ~ disinterest + normal + high_Interest'
+	elif(voice_feature == 'Arousal-Valence'):
+		f += ' ~ arousal + valence'
+	else:
+		print('Enter valid voice feature: Emotion, Affect, LOI, Arousal-Valence!')
+	mdl = smf.MNLogit.from_formula(f,d)
+	mdl_fit = mdl.fit()
+	return mdl_fit
+	
+#data = panda dataframe
+#labels = labels/ table column names from dataframe
+# returns list of F and p values for each attribute/ column in dataframe calculated by f_oneway from scipy.stats
+def f_anova(data, labels, char_feature):
+	res_F = []
+	res_p = []
+	for feat in labels:
+		if(char_feature == 'Sex'):
+			data.Sex.replace({0.0: "Male", 1.0: "Female"}, inplace = True)
+			group1 = data.loc[data['Sex'] == 'Male']
+			group2 = data.loc[data['Sex'] == 'Female']
+			F, p = st.f_oneway(group1[feat], group2[feat])
+		#elif(char_feature == 'Academical'):
+			#data.Academic_Status.replace()
+		elif(char_feature == 'Age'):
+			data.Age.replace({23: "Young", 24: "Intermediate", 25: "Old"}, inplace = True)
+			group1 = data.loc[data['Age'] == 'Young']
+			group2 = data.loc[data['Age'] == 'Intermediate']
+			group3 = data.loc[data['Age'] == 'Old']			
+			F, p = st.f_oneway(group1[feat], group2[feat], group3[feat])
+		else:
+			print('Invalid Argument: Please enter either Sex, Academical or Age as char_feature!')
+		res_F.append(F)
+		res_p.append(p)
+	return [res_F, res_p]

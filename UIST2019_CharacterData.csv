@@ -1,0 +1,193 @@
+ID,VideoTitle,Name,Sex,Academic Status,Age
+0,3D printed Fabric: Techniques for Design and 3D Weaving Programmable Textiles,Haruki Takahashi,Male,Post Doc,Young
+1,Question in 3D printed Fabric Techniques,,Female,,
+2,Question in 3D printed Fabric Techniques,,Female,,
+3,A 3D Printer Head as a Robotic Manipulator,Shohei Katakura,Male,PhD Student,Young
+4,Question in 3D Printer Head as Robotic Manipulator,,Male,,
+5,Accurate and Low-Latency Sensing of Touch Contact on Any Surface,Yizheng Gu,Male,PhD Student,Young
+6,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,
+7,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,Daniel Vogel,Male,Professor,Intermediate
+8,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,
+9,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,
+10,Aero-Plane: Handheld Force-Feedback Device that Renders weight Motion,Seungwoo Je,Male,PhD Student,Young
+11,Aero-Plane: Handheld Force-Feedback Device that Renders weight Motion,Myung Jim Kim,Male,Master Student,Young
+12,Question in Aero-Plane,Sean Follmer,Male,Assistant Professor,Young
+13,Question in Aero-Plane,,Male,,
+14,Bespoke: Interactively Synthesizing Custom GUIs from Command-Line Applications,Priyan Vaithilingam,Male,Master Student,Young
+15,Question in Bespoke,,Male,,
+16,Question in Bespoke,,Male,,
+17,Question in Bespoke,,Male,,
+18,Question in Bespoke,Michel Beaudouin-Lafon,Male,Professor,Old
+19,Bodystorming Human-Robot Interactions,David Porfirio,Male,PhD Student,Young
+20,Question in Bodystorming Human-Robot Interactions,,Male,,Old
+21,BubBowl: Display Vessel Using Electrolysis Bubbles in Drinkable Beverages,Ayaka Ishii,Female,Master Student,Young
+22,Question in BubBowl,,Female,,
+23,Question in BubBowl,,Male,,
+24,CapstanCrunch: A Haptic VR Controller,Mike Sinclair,Male,Researcher,Old
+25,Question in CapstanCrunch,,Male,,
+26,Question in CapstanCrunch,,Male,,
+27,Question in CapstanCrunch,,Male,,
+28,CAVRN: An Exploration and Evaluation of Collective Audience VR Nexus Experience,Sebastian Herscher,Male,PhD Student,Young
+29,Question in CAVRN,,Male,,
+30,Question in CAVRN,Daniel Leithinger,Male,Assistant Professor,Intermediate
+31,CircuitStyle: A System for Peripherally Reinforcing Best Pracitces in HW Computing,Josh Urban Davis,Male,PhD Student,Young
+32,Question in CircuitStyle,,Female,,
+33,Question in CircuitStyle,,Female,,
+34,Question in CircuitStyle,David (Ledo?),Male,PhD Student,Young
+35,Context-Aware Online Adaptation of Mixed Reality Interfaces,David Lindlbauer,Male,Post Doc,Young
+36,Question in Context-Aware Online Adaptation,,Male,,
+37,Question in Context-Aware Online Adaptation,,Male,,
+38,Designing AR Visualizations to Facilitate Stair Navigation for People with Low Vision,Yuhang Zhao,Female,PhD Student,Young
+39,Question in Stair Navigation,,Male,,
+40,Question in Stair Navigation,,Male,,
+41,Question in Stair Navigation,,Female,,
+42,DreamWalker: Substituting Real-World Walking Experiences with a VR,Jackie Yang,Male,PhD Student,Young
+43,Question in DreamWalker,,Male,,
+44,Question in DreamWalker,,Male,,
+45,Drift-Correction Techniques for Scale-Adaptive VR Navigation,Roberto Montano-Murillo,Male,Post Doc,Young
+46,Question in Drift-Correction,,Male,,
+47,ElastImpact: 2.5D Multilevel Instant Impact Using Elasticity on HMD,Hsin-Ruey Tsai (Ray),Male,Assistant Professor,Young
+48,Question in ElasImpact,,Male,,
+49,FaceWidgets: Exploring Tangible Interaction on Face with HMD,Wen-Jie Tseng,Male,Master Student,Young
+50,Question in FaceWidgets,,Male,,
+51,Gaze-Assisted Typing for Smart Glasses,Sunggeun Ahn,Male,PhD Student,Young
+52,Question in Gaze-Assisted Typing,Jacob O. Wobbrock,Male,Professor,Intermediate
+53,Question in Gaze-Assisted Typing,,Male,,
+54,GesturePod: Enabling On-Device Gesture-based Interaction for White Cane Users,Shishir Patil,Male,PhD Student,Young
+55,Question in GesturePod,,Male,,
+56,Question in GesturePod,,Male,,
+57,Question in GesturePod,,Male,,
+58,GhostAR: A Time-space Editor for Embodied Authring of Human-Robot Collaborative...,Yuanzhi Cao,Male,PhD Student,Young
+59,Question in GhostAR,,Male,,
+60,HairBrush for Immersive Data-Driven Hair Modeling,Yajie Zhao,Female,Post Doc,Young
+61,Question in HairBrush,,Male,,
+62,Question in HairBrush,,Male,,
+63,HapSense: A Soft Haptic I/O Device with Uninterrupted Dual Functionalities of Force...,Sang Ho Yoon,Male,Post Doc,Intermediate
+64,Question in HapSense,,Male,,
+65,Question in HapSense,,Female,,
+66,Interactive 360 Degree Glasses – Free Tabletop 3D Display,Motohiro Makiguchi,Male,Researcher,Young
+67,Question in Interactive 360 Degree Glasses,,Male,,
+68,Is this Real?: Generating Synthetic Data that Looks Real,Miro Mannino,Male,Researcher,Young
+69,Question in Is this Real?,,Male,,
+70,KnitPicking Textures: Programming and Modifying Complex Knitted Textures...,Megan Hofman,Female,PhD Student,Young
+71,Question in KnitPicking,,Male,,
+72,Question in KnitPicking,,Male,,
+73,Question in KnitPicking,,Female,,
+74,Knitting Skeletons: Computer-Aided Design Tool for Shaping and Patterning of Knitted Garments,Alexandre Kaspar,Male,PhD Student,Young
+75,Question in Knitting Skeletons,,Female,,
+76,LabelAR: A Spatial Guidance Interface for Fast Computer Vision Image Collection,Michael Laielli,Male,PhD Student,Young
+77,Question in LabelAR,,Male,,
+78,Learning Cooperative Personalized Policies from Gaze Data,Christoph Gebhardt,Male,PhD Student,Young
+79,Question in Learning Cooperative,,Male,,
+80,LEVIProps: Animating Levitated Optimized Fabric Structures using Holographic..,Rafael Morales,Male,Researcher,Young
+81,Question in LEVIProps,Lining Yao,Female,Assistant Professor,Young
+82,LightAnchors: Appropriating Point Lights for Spatially-Anchored AR Interfaces,Karan Ahuja,Male,PhD Student,Young
+83,Question in LightAnchors,,Male,,
+84,Question in LightAnchors,,Male,,
+85,Question in LightAnchors,,Male,,
+86,Loki: Facilitating Remote Instruction of Physical Tasks Using Bi-Directional MR Telepresence,Bala Thoravi Kumaravel,Male,PhD Student,Young
+87,Question in Loki,,Male,,
+88,Question in Loki,,Male,,
+89,Magical Hands: Mid-Air Hand Gestures for Animating in VR,Rahul Arora,Male,PhD Student,Young
+90,Question in Magical Hands,,Male,,
+91,Mallard: Turn the Web into a Contextualized Prototyping Environment for ML,Xiong Zhang,Male,PhD Student,Young
+92,Question in Mallard,,Male,,
+93,"Mantis: A Scalable, Lightweight and accessible Architecture to Build Multiform Force Feedback...",Gareth Barnaby,Male,PhD Student,Young
+94,Question in Mantis,,Male,,
+95,Question in Mantis,,Male,,
+96,Morphlour: Personalized Flour-based Morphing Food Induced by Dehydration..,Humphrey Yang,Male,Master Student,Young
+97,Question in M-Hair,,Male,,
+98,Question in M-Hair,,Male,,
+99,Optimizing Portrait Lighting at Capture-Time Using a 360 Camera as a Light Probe,Jane E,Female,PhD Student,Young
+100,Question in Optimizing Portrait Lighting,Scott Klemmer,Male,Professor,Intermediate
+101,Question in Optimizing Portrait Lighting,,Male,,
+102,Proxino: Enabling Prototyping of Virtual Circuits with Physical Proxies,Te-Yen Wu,Male,PhD Student,Young
+103,Question in Proxino,Andrea Bianchi,Male,Assistant Professor,Intermediate
+104,Question in Proxino,,Female,,
+105,"PseudoBend: Producing Haptic Illusions of Stretching, Bending and Twisting Using Grain Vibrations",Seongkook Heo,Male,Assistant Professor,Intermediate
+106,Question in PseudoBend,,Male,,
+107,Question in PseudoBend,,Female,,
+108,Question in PseudoBend,,Male,,
+109,Pull-Ups: Enhancing Suspension Activities in VR with Body-Scale Kinesthetic Force Feedbacks for VR,Liwei Chen,Male,Assistant Professor,Intermediate
+110,Question in Pull-Ups,,Male,,
+111,Question in Pull-Ups,,Male,,
+112,Question in Pull-Ups,,Female,,
+113,Question in Pull-Ups,,Male,,
+114,PUMICE: Multi-Modal Agent that Learns Concepts and Conditionals from Natural Language and Demonstrations,Toby Jia-Jun Li,Male,PhD Student,Young
+115,Question in PUMICE,,Male,,
+116,Question in PUMICE,,Male,,
+117,Self-healing UI,Koya Narumi,Male,PhD Student,Young
+118,Self-healing UI,,Female,Master Student,Young
+119,Question in Self-healing UI,,Male,,
+120,Question in Self-healing UI,,Male,,
+121,Question in Self-healing UI,,Female,,
+122,SensorSnaps: Integrating Wireless Sensor Nodes into Fabric Snap Fasteners for Textile Interfaces,Artem Dementyev,Male,PhD Student,Young
+123,Question in SensorSnaps,,Female,,
+124,ShapeBots: Shape changing swarm robots,Ryo Suzuki,Male,PhD Student,Young
+125,Question in ShapeBots,,Male,,
+126,Sketchforme: Composing Sketched Scenes from Text Descriptions for Interactive Applications,Forrest Huang,Male,PhD Student,Young
+127,Question in Sketchforme,,Male,,
+128,Question in Sketchforme,,Male,,
+129,Skin-On Interfaces: Bio-Driven Approach for Artificial Skin Design to Cover Interactive Devices,Marc Teyssier,Male,PhD Student,Young
+130,Question in Skin-On,,Female,,
+131,Question in Skin-On,,Male,,
+132,Soft Inkjet Circuits,Arshad Khan,Male,Post Doc,Young
+133,Question in Soft Inkjet Circuits,,Male,,
+134,Sozu: Self-Powered Radio Tags for Building-Scale Activity Sensing,Yang Zhang,Male,PhD Student,Young
+135,Question in Sozu,,Male,,
+136,Question in Sozu,,Male,,
+137,Question in Sozu,,Male,,
+138,Supporting Elder Connectedness through Cognitively Sustainable Design...,Rebecca Kleinberger,Female,PhD Student,Young
+139,Question in Supporting Elder Connectedness,,Male,,
+140,Question in Supporting Elder Connectedness,,Male,,
+141,Question in Supporting Elder Connectedness,,Male,,
+142,Question in Supporting Elder Connectedness,,Male,,
+143,SWISH: Shifting-Weight Interface of Simulated Hydrodynamics,Shahabedin Sagheb,Male,Assistant Professor,Young
+144,Question in SWISH,,Male,,
+145,Question in SWISH,,Male,,
+146,Question in SWISH,,Male,,
+147,Tactlets: Adding Tactile Feedback to 3D Objects Using Custom Printed Controls,Daniel Gröger,Male,PhD Student,Young
+148,Question in Tactlets,,Female,,
+149,Tea: A High-Level Language and Runtime System for Automating Statistical Analysis,Eunice Jun,Female,PhD Student,Young
+150,Question in Tea,,Female,,
+151,Question in Tea,Brian Smith,Male,Assistant Professor,Young
+152,Question in Tea,,Male,,
+153,Tessutivo: Contextual Interactions on Interactive Fabrics with Inductive Sensing,Jun Gong,Male,PhD Student,Young
+154,Question in Tessutivo,,Male,,
+155,Question in Tessutivo,,Male,,
+156,The Memory Palace,Sauvik Das,Male,PhD Student,Young
+157,Question in The Memory Palace,Katharina Reinecke,Female,Assistant Professor,Intermediate
+158,Question in The Memory Palace,,Male,,
+159,TilePoP: Tile-type Pop-up Prop for Virtual Reality,Shan-Yuan Teng,Male,PhD Student,Young
+160,Question in TilePoP,,Male,,
+161,Question in TilePoP,,Male,,
+162,Tip-Tap: Battery-free Discrete 2D Fingertip Input,Keiko Katsuragawa,Female,Assistant Professor,Intermediate
+163,Question in Tip-Tap,,Male,,
+164,Question in Tip-Tap,,Female,,
+165,Question in Tip-Tap,,Male,,
+166,TipText: Eyes-Free Text Entry on a Fingertip Keyboard,Zheer Xu,Male,PhD Student,Young
+167,Question in TipText,,Male,,
+168,Question in TipText,,Female,,
+169,Turn-by-Wire: Computationally Mediated Physical Fabrication,Rundong Tian,Male,PhD Student,Young
+170,Question in Turn-by-Wire,,Male,,
+171,Question in Turn-by-Wire,,Female,,
+172,Question in Turn-by-Wire,,Female,,
+173,"Type, Then Correct: Intelligent Text Correction Techniques for Mobile Text Entry Using NN",Mingrui „Ray“ Zhang,Male,PhD Student,Young
+174,"Question in Type, Then Correct",Michel Beaudouin-Lafon,Male,Professor,Old
+175,Unakite: Scaffolding Developers' Decision-Making Using the Web,Michael Xieyang Liu,Male,PhD Student,Young
+176,Question in Unakite,,Male,,
+177,Question in Unakite,,Male,,
+178,"Videostrates: Collaborative, Distributed and Programmable Video Manipulation",Clemens N. Klokmose,Male,Assistant Professor,Intermediate
+179,Question in Videostrates,,Male,,
+180,Question in Videostrates,,Male,,
+181,View-Dependent Video Textures for 360° Video,Sean J. Liu,Female,PhD Student,Young
+182,Question in View-Dependent Video Textures,Michel Beaudouin-Lafon,Male,Professor,Old
+183,Virtual Muscle Force: Communicating Kinesthetic Forces Through Pseudo-Haptic Feedback and Muscle Input,Gabriel Haas,Male,Researcher,Young
+184,Question in Virtual Muscle Force,,Male,,
+185,Question in Virtual Muscle Force,,Female,,
+186,Question in Virtual Muscle Force,,Male,,
+187,Question in Virtual Muscle Force,,Male,,
+188,X-Droid: A Quick and Easy Android Prorotyping Framework with a Single-App Illusion,Donghwi Kim,Male,PhD Student,Young
+189,Question in X-Droid,Toby Jia-Jun Li,Male,PhD Student,Young
+190,Question in X-Droid,,Male,,
+191,Question in X-Droid,,Female,,
