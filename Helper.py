@@ -108,65 +108,52 @@ def distPlots(data, features, type):
 		sns.kdeplot(data[f], shade = True)
 	return
 	
-def chi2(data, char_feature, type, shouldPrint = False):
-	if(type == 0):
-		feature = 'Emotion'
-	elif(type == 1):
-		feature = 'Affect'
-	elif(type == 2):
-		feature = 'Arousal Valence'
-	elif(type == 3):
-		feature = 'Level of Interest'
-	if(char_feature == 'Sex' or char_feature == 'Academic Status'):
-		df_data_group0 = cleanData(data, char_feature, 0)
-		df_data_group1 = cleanData(data, char_feature, 1)
-		if(char_feature == 'Sex'):
-			# Last zero stands for char_feature = Sex
-			fre_table = calcFrequencyTable([df_data_group0,df_data_group1],type, 0 )
-			fre_table.index = ['Male', 'Female']
-		elif(char_feature == 'Academic Status'):
-			fre_table = calcFrequencyTable([df_data_group0,df_data_group1],type, 1 )
-			fre_table.index = ['Bachelor', 'Master']
-	elif(char_feature == 'Age'):
-		df_data_group0 = cleanData(data, char_feature, 23)
-		df_data_group1 = cleanData(data, char_feature, 24)
-		df_data_group2 = cleanData(data, char_feature, 25)
-		fre_table = calcFrequencyTable([df_data_group0,df_data_group1, df_data_group2], type, 2)
-		fre_table.index = ['Young', 'Middle', 'Old']
-		
-	# ################
-	# This line will be deleted once real data is inserted!!!!
-	# ########
-	fre_table += 5
-	chi2 = st.chi2_contingency(fre_table)
-	if(shouldPrint == True):
-		print('Chi square of ' + feature + ' : ' + str(chi2[0]) + ' with p-value of: ' + str(chi2[1]))
-	table = sm.stats.Table(fre_table)
-	residuals = table.standardized_resids
-	return [chi2, fre_table, residuals]
+def chi2(data, labels, char_feature, shouldPrint = False):
+	tables = calcFrequencyTable(data, labels, char_feature)
+	chi2s = []
+	residuals = []
+	for i in range(0,len(tables)):
+		# table += 5 has to be removed for final analysis, however, leaving this line of code out would result in an error bc there are 0 elements in the table
+		tables[i] += 5
+		chi2 = st.chi2_contingency(tables[i])
+		if(shouldPrint == True):
+			print('Chi square of ' + labels[i] + ' : ' + str(chi2[0]) + ' with p-value of: ' + str(chi2[1]))
+		table = sm.stats.Table(tables[i])
+		residual = table.standardized_resids
+		chi2s.append(chi2)
+		residuals.append(residual)
+	return [chi2s, residuals]
 
-def chi2_post_hoc(fre_table, method, shouldPrint= False, calculateResiduals = False):
-	all_combis = list(it.combinations(fre_table.index,2))
-	p_vals = []
-	res = []
-	for comb in all_combis:
-		#Create new data frame from combinations to conduct chi2 independence test
-		new_df = fre_table[(fre_table.index == comb[0]) | (fre_table.index == comb[1])]
-		#Calculate residuals if needed
-		if(calculateResiduals == True):
-			new_table = sm.stats.Table(new_df)
-			new_res = new_table.standardized_resids
-		chi2_ph = st.chi2_contingency(new_df, correction = True)
-		p_vals.append(chi2_ph[1])
-		if(calculateResiduals == True):
-			res.append(new_res)
-	reject_list, corrected_p_vals = multipletests(p_vals, method = method)[:2]
-	if(shouldPrint == True):
-		print('Combinations: ' + str(all_combis))
-		print('Reject List: ' + str(reject_list))
-		print('Corrected p-values: ' + str(corrected_p_vals))
-	if(calculateResiduals == False):
-		return [reject_list, corrected_p_vals, all_combis]
+def chi2_post_hoc(data, labels, char_feature, method, shouldPrint= False, calculateResiduals = False):
+	fre_tables = calcFrequencyTable(data, labels, char_feature)
+	#Since the index (=Character_feature) will be the same for every voice_feature, we get all combinations before iterating over all voice_features
+	all_combis = list(it.combinations(fre_tables[0].index,2))
+	for i in range(0,len(fre_tables)):
+		p_vals = []
+		res = []
+		for comb in all_combis:
+			#Create new data frame from combinations to conduct chi2 independence test
+			new_df = fre_tables[i][(fre_tables[i].index == comb[0]) | (fre_tables[i].index == comb[1])]
+			#Calculate residuals if needed
+			if(calculateResiduals == True):
+				new_table = sm.stats.Table(new_df)
+				new_res = new_table.standardized_resids
+				
+			
+			# table += 5 has to be removed for final analysis, however, leaving this line of code out would result in an error bc there are 0 elements in the table
+			new_df += 5
+			chi2_ph = st.chi2_contingency(new_df, correction = True)
+			p_vals.append(chi2_ph[1])
+			if(calculateResiduals == True):
+				res.append(new_res)
+		reject_list, corrected_p_vals = multipletests(p_vals, method = method)[:2]
+		if(shouldPrint == True):
+			print(labels[i])
+			print('Combinations: ' + str(all_combis))
+			print('Reject List: ' + str(reject_list))
+			print('Corrected p-values: ' + str(corrected_p_vals))
+		if(calculateResiduals == False):
+			return [reject_list, corrected_p_vals, all_combis]
 	
 	else:
 		return [reject_list, corrected_p_vals, all_combis, res ]
@@ -177,55 +164,59 @@ def displayANOVA(anova_res, label, type, char_type):
 	print(anova_res)
 	print('\n')
 	return
-
-# Converts a panda data frame containing decimal values to frequency tables so that the largest number for a row is counted as a frequency of e.g. the emotion anger
-def calcFrequencyTable(data, voice_feature, char_feature):
-	if(voice_feature == 0):
-		fre_table = pd.DataFrame(columns = ['anger', 'boredom', 'disgust', 'fear', 'happiness', 'neutral', 'sadness'])
-	elif(voice_feature == 1):
-		fre_table = pd.DataFrame(columns = ['aggressive', 'cheerful', 'intoxicated', 'nervous', 'neutral', 'tired'])
-	elif(voice_feature == 2):
-		fre_table = pd.DataFrame(columns = ['arousal', 'valence'])
-	elif(voice_feature == 3):
-		fre_table = pd.DataFrame(columns = ['disinterest', 'normal', 'high interest'])
-	else:
-		print('Did not provide correct number for variable voice_feature! Use 0 for emotion, 1 for affect, 2 for arousal/valence and 3 for interest!')
 	
-	#0 stands for sex
-	if(char_feature == 0):
-		maxValueIndex_male = data[0].idxmax(axis = 1)
-		max_ValueIndex_female = data[1].idxmax(axis = 1)			
-		temp_male = maxValueIndex_male.value_counts()
-		temp_female = max_ValueIndex_female.value_counts()
-		
-		fre_table = fre_table.append(temp_male, ignore_index = True)
-		fre_table = fre_table.append(temp_female, ignore_index = True)
-		
-	# 1 stands for academic status. For now it is two dimensional as sex, but that may change depending on the final data set. That's why it's seperate..
-	elif(char_feature == 1):
-		maxValueIndex_bach = data[0].idxmax(axis = 1)
-		max_ValueIndex_mast = data[1].idxmax(axis = 1)			
-		temp_bach = maxValueIndex_bach.value_counts()
-		temp_mast = max_ValueIndex_mast.value_counts()
-		
-		fre_table = fre_table.append(temp_bach, ignore_index = True)
-		fre_table = fre_table.append(temp_mast, ignore_index = True)
-		
-	# 2 stands for age
-	elif(char_feature == 2):
-		maxValueIndex_young = data[0].idxmax(axis = 1)
-		maxValueIndex_middle = data[1].idxmax(axis = 1)
-		maxValueIndex_old = data[2].idxmax(axis = 1)
-		temp_young = maxValueIndex_young.value_counts()
-		temp_middle = maxValueIndex_middle.value_counts()
-		temp_old = maxValueIndex_old.value_counts()
-		
-		fre_table = fre_table.append(temp_young, ignore_index = True)
-		fre_table = fre_table.append(temp_middle, ignore_index = True)
-		fre_table = fre_table.append(temp_old, ignore_index = True)
-		
-	fre_table = fre_table.fillna(0)
-	return fre_table
+def binData(data):
+	count = np.zeros(4)
+	for i in data:
+		if(i <= 0.25):
+			count[0] +=1
+		elif(i <= 0.5 and i > 0.25):
+			count[1]+=1
+		elif(i <= 0.75 and i > 0.5):
+			count[2]+=1
+		elif(i <= 1.0 and i > 0.75):
+			count[3]+=1			
+	return count
+
+# Converts a panda data frame containing decimal values to frequency tables 
+def calcFrequencyTable(data, labels, char_feature):
+	tables = []
+	
+	for l in labels:
+		if(char_feature == 'Sex'):
+			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Male', 'Female'] )
+			group1 = data.loc[data['Sex'] == 'Male'][l]
+			group2 = data.loc[data['Sex'] == 'Female'][l]
+			row1 = binData(group1)
+			row2 = binData(group2)
+			df_tab.loc['Male'] = row1
+			df_tab.loc['Female'] = row2
+
+		elif(char_feature == 'Academic'):
+			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Grad Student', 'PhD'] )
+			group1 = data.loc[data['Academic Status'] == 'Grad Student'][l]
+			group2 = data.loc[data['Academic Status'] == 'PhD'][l]
+			row1 = binData(group1)
+			row2 = binData(group2)
+			df_tab.loc['Grad Student'] = row1
+			df_tab.loc['PhD'] = row2
+		elif(char_feature == 'Age'):
+			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Young', 'Intermediate','Old'] )
+			group1 = data.loc[data['Age'] == 'Young'][l]
+			group2 = data.loc[data['Age'] == 'Intermediate'][l]
+			group3 = data.loc[data['Age'] == 'Old'][l]
+			row1 = binData(group1)
+			row2 = binData(group2)
+			row3 = binData(group3)
+			df_tab.loc['Young'] = row1
+			df_tab.loc['Intermediate'] = row2
+			df_tab.loc['Old'] = row3
+
+		else:
+			print('Either use Sex, Academic or Age as KeyWord Arguments for char_feature!')
+			return
+		tables.append(df_tab)
+	return tables
 	
 def logReg(data, voice_feature, char_feature, specificVoiceF):
 	d = data[[char_feature, specificVoiceF]]
