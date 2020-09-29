@@ -15,7 +15,7 @@ def createMeanDataFrame(data, type, label):
 		d = d.mean()
 		r.append(d)
 	if(type == 'Academic'):
-		 res = pd.DataFrame({'Master Student': r[0], 'PhD Student': r[1], 'Researcher': r[2], 'Professor': r[3], 'Assistant Professor': r[4], 'Post Doc': r[5]}, index = label)
+		 res = pd.DataFrame({'Grad Student': r[0], 'PhD': r[1]}, index = label)
 	elif(type == 'Age'):
 		res = pd.DataFrame({'Young': r[0], 'Intermediate': r[1], 'Old': r[2]}, index = label)
 	elif(type == 'Sex'):
@@ -170,6 +170,13 @@ def chi2_post_hoc(fre_table, method, shouldPrint= False, calculateResiduals = Fa
 	
 	else:
 		return [reject_list, corrected_p_vals, all_combis, res ]
+		
+def displayANOVA(anova_res, label, type, char_type):
+	print('ANOVA test for ' + char_type + ' and ' + type + ': ')
+	print(label)
+	print(anova_res)
+	print('\n')
+	return
 
 # Converts a panda data frame containing decimal values to frequency tables so that the largest number for a row is counted as a frequency of e.g. the emotion anger
 def calcFrequencyTable(data, voice_feature, char_feature):
@@ -230,12 +237,13 @@ def logReg(data, voice_feature, char_feature, specificVoiceF):
 	
 def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	if(char_feature == 'Sex'):
-		d = data.drop(['Char_ID','ID','Name','VideoTitle', 'Filename', 'Age', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID','ID','Name','VideoTitle', 'VideoID','Filename', 'Age', 'Academic'], axis = 1)
 		d.Sex.replace({'Male': 0.0, 'Female':1.0}, inplace = True)
 	elif(char_feature == 'Academic'):
-		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle', 'Age', 'Sex'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoID','VideoTitle', 'Age', 'Sex'], axis = 1)
+		d.Academic.replace({'Grad Student': 0.0, 'PhD': 1.0}, inplace = True)
 	elif(char_feature == 'Age'):
-		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle','Sex', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoID','VideoTitle','Sex', 'Academic'], axis = 1)
 	else:
 		print('Either use Sex, Academic or Age as input for character feature')
 	
@@ -262,9 +270,9 @@ def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 def multiNomiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	
 	if(char_feature == 'Academic'):
-		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle', 'Age', 'Sex'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'VideoID','Name', 'VideoTitle', 'Age', 'Sex'], axis = 1)
 	elif(char_feature == 'Age'):
-		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoTitle','Sex', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename','VideoID', 'Name', 'VideoTitle','Sex', 'Academic'], axis = 1)
 	else:
 		print('Either use Sex, Academic or Age as input for character feature')
 	f = char_feature
@@ -290,20 +298,19 @@ def f_anova(data, labels, char_feature):
 	res_p = []
 	for feat in labels:
 		if(char_feature == 'Sex'):
-			data.Sex.replace({0.0: "Male", 1.0: "Female"}, inplace = True)
 			group1 = data.loc[data['Sex'] == 'Male']
 			group2 = data.loc[data['Sex'] == 'Female']
 			F, p = st.f_oneway(group1[feat], group2[feat])
-		#elif(char_feature == 'Academical'):
-			#data.Academic_Status.replace()
+		elif(char_feature == 'Academical'):
+			data.Academic_Status.replace()
 		elif(char_feature == 'Age'):
-			data.Age.replace({23: "Young", 24: "Intermediate", 25: "Old"}, inplace = True)
 			group1 = data.loc[data['Age'] == 'Young']
 			group2 = data.loc[data['Age'] == 'Intermediate']
 			group3 = data.loc[data['Age'] == 'Old']			
 			F, p = st.f_oneway(group1[feat], group2[feat], group3[feat])
 		else:
 			print('Invalid Argument: Please enter either Sex, Academical or Age as char_feature!')
+			return
 		res_F.append(F)
 		res_p.append(p)
 	return [res_F, res_p]
