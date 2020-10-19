@@ -1,193 +1,238 @@
-ID,VideoTitle,Name,Sex,Academic Status,Age,VideoID,IsNativeSpeaker
-0,3D printed Fabric: Techniques for Design and 3D Weaving Programmable Textiles,Haruki Takahashi,Male,PhD,Young,z07keSZOkO8,Asian Non-Native
-1,Question in 3D printed Fabric Techniques,,Female,,,,Native Speaker
-2,Question in 3D printed Fabric Techniques,,Female,,,,Native Speaker
-3,A 3D Printer Head as a Robotic Manipulator,Shohei Katakura,Male,Grad Student,Young,xNOvZbEyRAc,Asian Non-Native
-4,Question in 3D Printer Head as Robotic Manipulator,,Male,,,,Native Speaker
-5,Accurate and Low-Latency Sensing of Touch Contact on Any Surface,Yizheng Gu,Male,Grad Student,Young,xsN4XRrcftU,Asian Non-Native
-6,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,,,Asian Non-Native
-7,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,Daniel Vogel,Male,PhD,Intermediate,,Native Speaker
-8,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,,,Native Speaker
-9,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,,,Asian Non-Native
-10,Aero-Plane: Handheld Force-Feedback Device that Renders weight Motion,Seungwoo Je,Male,Grad Student,Young,ZlaXB0N3JFU,Asian Non-Native
-11,Aero-Plane: Handheld Force-Feedback Device that Renders weight Motion,Myung Jim Kim,Male,Grad Student,Young,,-
-12,Question in Aero-Plane,Sean Follmer,Male,PhD,Young,,Native Speaker
-13,Question in Aero-Plane,,Male,,,,Native Speaker
-14,Bespoke: Interactively Synthesizing Custom GUIs from Command-Line Applications,Priyan Vaithilingam,Male,Grad Student,Young,ceXqyyAzXIE,Asian Non-Native
-15,Question in Bespoke,,Male,,,,Asian Non-Native
-16,Question in Bespoke,,Male,,,,Europ. Non-Native
-17,Question in Bespoke,,Male,,,,Native Speaker
-18,Question in Bespoke,Michel Beaudouin-Lafon,Male,PhD,Old,,Europ. Non-Native
-19,Bodystorming Human-Robot Interactions,David Porfirio,Male,Grad Student,Young,bxrN6dW5lH8,Native Speaker
-20,Question in Bodystorming Human-Robot Interactions,,Male,,Old,,Native Speaker
-21,BubBowl: Display Vessel Using Electrolysis Bubbles in Drinkable Beverages,Ayaka Ishii,Female,Grad Student,Young,Lrkl8XP9BSQ,Asian Non-Native
-22,Question in BubBowl,,Female,,,,Native Speaker
-23,Question in BubBowl,,Male,,,,Native Speaker
-24,CapstanCrunch: A Haptic VR Controller,Mike Sinclair,Male,PhD,Old,fyVofcglIFE,Native Speaker
-25,Question in CapstanCrunch,,Male,,,,Native Speaker
-26,Question in CapstanCrunch,,Male,,,,Native Speaker
-27,Question in CapstanCrunch,,Male,,,,Asian Non-Native
-28,CAVRN: An Exploration and Evaluation of Collective Audience VR Nexus Experience,Sebastian Herscher,Male,Grad Student,Young,B9nytffmgWI,Native Speaker
-29,Question in CAVRN,,Male,,,,Asian Non-Native
-30,Question in CAVRN,Daniel Leithinger,Male,PhD,Intermediate,,Europ. Non-Native
-31,CircuitStyle: A System for Peripherally Reinforcing Best Pracitces in HW Computing,Josh Urban Davis,Male,Grad Student,Young,MqhK5Bo0ljI,Native Speaker
-32,Question in CircuitStyle,,Female,,,,Native Speaker
-33,Question in CircuitStyle,,Female,,,,Native Speaker
-34,Question in CircuitStyle,David (Ledo?),Male,Grad Student,Young,,Native Speaker
-35,Context-Aware Online Adaptation of Mixed Reality Interfaces,David Lindlbauer,Male,PhD,Young,SammTUw96Mg,Europ. Non-Native
-36,Question in Context-Aware Online Adaptation,,Male,,,,Native Speaker
-37,Question in Context-Aware Online Adaptation,,Male,,,,Native Speaker
-38,Designing AR Visualizations to Facilitate Stair Navigation for People with Low Vision,Yuhang Zhao,Female,Grad Student,Young,r5ul6gzak3A,Asian Non-Native
-39,Question in Stair Navigation,,Male,,,,Native Speaker
-40,Question in Stair Navigation,,Male,,,,Asian Non-Native
-41,Question in Stair Navigation,,Female,,,,Native Speaker
-42,DreamWalker: Substituting Real-World Walking Experiences with a VR,Jackie Yang,Male,Grad Student,Young,B9887Q4BCAo,Asian Non-Native
-43,Question in DreamWalker,,Male,,,,Asian Non-Native
-44,Question in DreamWalker,,Male,,,,Asian Non-Native
-45,Drift-Correction Techniques for Scale-Adaptive VR Navigation,Roberto Montano-Murillo,Male,PhD,Young,piqFtVCURQs,Europ. Non-Native
-46,Question in Drift-Correction,,Male,,,,Native Speaker
-47,ElastImpact: 2.5D Multilevel Instant Impact Using Elasticity on HMD,Hsin-Ruey Tsai (Ray),Male,PhD,Young,x77sVdE6axk,Asian Non-Native
-48,Question in ElasImpact,,Male,,,,Native Speaker
-49,FaceWidgets: Exploring Tangible Interaction on Face with HMD,Wen-Jie Tseng,Male,Grad Student,Young,kZwG6Ah9lek,Asian Non-Native
-50,Question in FaceWidgets,,Male,,,,Native Speaker
-51,Gaze-Assisted Typing for Smart Glasses,Sunggeun Ahn,Male,Grad Student,Young,6sRlLxeA,Asian Non-Native
-52,Question in Gaze-Assisted Typing,Jacob O. Wobbrock,Male,PhD,Intermediate,,Native Speaker
-53,Question in Gaze-Assisted Typing,,Male,,,,Native Speaker
-54,GesturePod: Enabling On-Device Gesture-based Interaction for White Cane Users,Shishir Patil,Male,Grad Student,Young,N4Og10qWMZ8,Asian Non-Native
-55,Question in GesturePod,,Male,,,,Native Speaker
-56,Question in GesturePod,,Male,,,,Asian Non-Native
-57,Question in GesturePod,,Male,,,,Asian Non-Native
-58,GhostAR: A Time-space Editor for Embodied Authring of Human-Robot Collaborative...,Yuanzhi Cao,Male,Grad Student,Young,,Asian Non-Native
-59,Question in GhostAR,,Male,,,,Native Speaker
-60,HairBrush for Immersive Data-Driven Hair Modeling,Yajie Zhao,Female,PhD,Young,Z-6FQz2DZjw,Asian Non-Native
-61,Question in HairBrush,,Male,,,,Asian Non-Native
-62,Question in HairBrush,,Male,,,,Native Speaker
-63,HapSense: A Soft Haptic I/O Device with Uninterrupted Dual Functionalities of Force...,Sang Ho Yoon,Male,PhD,Intermediate,O3i3IaMdbXg,Asian Non-Native
-64,Question in HapSense,,Male,,,,Asian Non-Native
-65,Question in HapSense,,Female,,,,Native Speaker
-66,Interactive 360 Degree Glasses – Free Tabletop 3D Display,Motohiro Makiguchi,Male,PhD,Young,fjFLKKjVlnY,Asian Non-Native
-67,Question in Interactive 360 Degree Glasses,,Male,,,,Native Speaker
-68,Is this Real?: Generating Synthetic Data that Looks Real,Miro Mannino,Male,PhD,Young,,Asian Non-Native
-69,Question in Is this Real?,,Male,,,,Native Speaker
-70,KnitPicking Textures: Programming and Modifying Complex Knitted Textures...,Megan Hofman,Female,Grad Student,Young,khAtDAeu,Native Speaker
-71,Question in KnitPicking,,Male,,,,Native Speaker
-72,Question in KnitPicking,,Male,,,,Native Speaker
-73,Question in KnitPicking,,Female,,,,Native Speaker
-74,Knitting Skeletons: Computer-Aided Design Tool for Shaping and Patterning of Knitted Garments,Alexandre Kaspar,Male,Grad Student,Young,1A86wyP7hsk,Europ. Non-Native
-75,Question in Knitting Skeletons,,Female,,,,Native Speaker
-76,LabelAR: A Spatial Guidance Interface for Fast Computer Vision Image Collection,Michael Laielli,Male,Grad Student,Young,3zEYHrdp4,Native Speaker
-77,Question in LabelAR,,Male,,,,Asian Non-Native
-78,Learning Cooperative Personalized Policies from Gaze Data,Christoph Gebhardt,Male,Grad Student,Young,Mi2Ne3YRStk,Europ. Non-Native
-79,Question in Learning Cooperative,,Male,,,,Native Speaker
-80,LEVIProps: Animating Levitated Optimized Fabric Structures using Holographic..,Rafael Morales,Male,PhD,Young,4Y5C8AZZd80,Europ. Non-Native
-81,Question in LEVIProps,Lining Yao,Female,PhD,Young,,Asian Non-Native
-82,LightAnchors: Appropriating Point Lights for Spatially-Anchored AR Interfaces,Karan Ahuja,Male,Grad Student,Young,mf2fy-Om23g,Asian Non-Native
-83,Question in LightAnchors,,Male,,,,Native Speaker
-84,Question in LightAnchors,,Male,,,,Native Speaker
-85,Question in LightAnchors,,Male,,,,Asian Non-Native
-86,Loki: Facilitating Remote Instruction of Physical Tasks Using Bi-Directional MR Telepresence,Bala Thoravi Kumaravel,Male,Grad Student,Young,urGqP7FHpOE,Asian Non-Native
-87,Question in Loki,,Male,,,,Europ. Non-Native
-88,Question in Loki,,Male,,,,Asian Non-Native
-89,Magical Hands: Mid-Air Hand Gestures for Animating in VR,Rahul Arora,Male,Grad Student,Young,fIHhm7Vrgwo,Asian Non-Native
-90,Question in Magical Hands,,Male,,,,Asian Non-Native
-91,Mallard: Turn the Web into a Contextualized Prototyping Environment for ML,Xiong Zhang,Male,Grad Student,Young,kZwG6Ah9lek,Asian Non-Native
-92,Question in Mallard,,Male,,,,Native Speaker
-93,"Mantis: A Scalable, Lightweight and accessible Architecture to Build Multiform Force Feedback...",Gareth Barnaby,Male,Grad Student,Young,wm2j9xQOWIU,Native Speaker
-94,Question in Mantis,,Male,,,,Native Speaker
-95,Question in Mantis,,Male,,,,Europ. Non-Native
-96,Morphlour: Personalized Flour-based Morphing Food Induced by Dehydration..,Humphrey Yang,Male,Grad Student,Young,8CrUvqvVQHI,Asian Non-Native
-97,Question in Morphlour,,Male,,,,Native Speaker
-98,Question in Morphlour,,Male,,,,Asian Non-Native
-99,Optimizing Portrait Lighting at Capture-Time Using a 360 Camera as a Light Probe,Jane E,Female,Grad Student,Young,W3miw6cYp80,Native Speaker
-100,Question in Optimizing Portrait Lighting,Scott Klemmer,Male,PhD,Intermediate,,Native Speaker
-101,Question in Optimizing Portrait Lighting,,Male,,,,Asian Non-Native
-102,Proxino: Enabling Prototyping of Virtual Circuits with Physical Proxies,Te-Yen Wu,Male,Grad Student,Young,_Klvg8YSrJQ,Asian Non-Native
-103,Question in Proxino,Andrea Bianchi,Male,PhD,Intermediate,,Europ. Non-Native
-104,Question in Proxino,,Female,,,,Native Speaker
-105,"PseudoBend: Producing Haptic Illusions of Stretching, Bending and Twisting Using Grain Vibrations",Seongkook Heo,Male,PhD,Intermediate,rCYeWPUcMZU,Asian Non-Native
-106,Question in PseudoBend,,Male,,,,Europ. Non-Native
-107,Question in PseudoBend,,Female,,,,Native Speaker
-108,Question in PseudoBend,,Male,,,,Europ. Non-Native
-109,Pull-Ups: Enhancing Suspension Activities in VR with Body-Scale Kinesthetic Force Feedbacks for VR,Liwei Chen,Male,PhD,Intermediate,F8yPlAL9_BU,Asian Non-Native
-110,Question in Pull-Ups,,Male,,,,Asian Non-Native
-111,Question in Pull-Ups,,Male,,,,Native Speaker
-112,Question in Pull-Ups,,Female,,,,Asian Non-Native
-113,Question in Pull-Ups,,Male,,,,Native Speaker
-114,PUMICE: Multi-Modal Agent that Learns Concepts and Conditionals from Natural Language and Demonstrations,Toby Jia-Jun Li,Male,Grad Student,Young,KSFZ0paxbxc,Asian Non-Native
-115,Question in PUMICE,,Male,,,,Asian Non-Native
-116,Question in PUMICE,,Male,,,,Asian Non-Native
-117,Self-healing UI,Koya Narumi,Male,Grad Student,Young,3sKCUjWk3NE,Asian Non-Native
-118,Self-healing UI,,Female,Grad Student,Young,,Asian Non-Native
-119,Question in Self-healing UI,,Male,,,,Native Speaker
-120,Question in Self-healing UI,,Male,,,,Native Speaker
-121,Question in Self-healing UI,,Female,,,,Native Speaker
-122,SensorSnaps: Integrating Wireless Sensor Nodes into Fabric Snap Fasteners for Textile Interfaces,Artem Dementyev,Male,Grad Student,Young,9AOl7TXT2i4,Europ. Non-Native
-123,Question in SensorSnaps,,Female,,,,Native Speaker
-124,ShapeBots: Shape changing swarm robots,Ryo Suzuki,Male,Grad Student,Young,2QCEZ7Okzyw,Asian Non-Native
-125,Question in ShapeBots,,Male,,,,Asian Non-Native
-126,Sketchforme: Composing Sketched Scenes from Text Descriptions for Interactive Applications,Forrest Huang,Male,Grad Student,Young,h1dl4ZQwqaw,Native Speaker
-127,Question in Sketchforme,,Male,,,,Asian Non-Native
-128,Question in Sketchforme,,Male,,,,Native Speaker
-129,Skin-On Interfaces: Bio-Driven Approach for Artificial Skin Design to Cover Interactive Devices,Marc Teyssier,Male,Grad Student,Young,kGzY99HWeME,Europ. Non-Native
-130,Question in Skin-On,,Female,,,,Asian Non-Native
-131,Question in Skin-On,,Male,,,,Europ. Non-Native
-132,Soft Inkjet Circuits,Arshad Khan,Male,PhD,Young,zLGvlKquKO4,Asian Non-Native
-133,Question in Soft Inkjet Circuits,,Male,,,,Asian Non-Native
-134,Sozu: Self-Powered Radio Tags for Building-Scale Activity Sensing,Yang Zhang,Male,Grad Student,Young,Lv2MH517b1I,Asian Non-Native
-135,Question in Sozu,,Male,,,,Europ. Non-Native
-136,Question in Sozu,,Male,,,,Native Speaker
-137,Question in Sozu,,Male,,,,Asian Non-Native
-138,Supporting Elder Connectedness through Cognitively Sustainable Design...,Rebecca Kleinberger,Female,Grad Student,Young,8nlgZhhRUOs,Europ. Non-Native
-139,Question in Supporting Elder Connectedness,,Male,,,,Asian Non-Native
-140,Question in Supporting Elder Connectedness,,Male,,,,Native Speaker
-141,Question in Supporting Elder Connectedness,,Male,,,,Native Speaker
-142,Question in Supporting Elder Connectedness,,Male,,,,Asian Non-Native
-143,SWISH: Shifting-Weight Interface of Simulated Hydrodynamics,Shahabedin Sagheb,Male,PhD,Young,29Vj3UMnp6o,Asian Non-Native
-144,Question in SWISH,,Male,,,,Native Speaker
-145,Question in SWISH,,Male,,,,Native Speaker
-146,Question in SWISH,,Male,,,,Europ. Non-Native
-147,Tactlets: Adding Tactile Feedback to 3D Objects Using Custom Printed Controls,Daniel Gröger,Male,Grad Student,Young,RvsVMF7dYLs,Europ. Non-Native
-148,Question in Tactlets,,Female,,,,Native Speaker
-149,Tea: A High-Level Language and Runtime System for Automating Statistical Analysis,Eunice Jun,Female,Grad Student,Young,BpYP7U7y77s,Native Speaker
-150,Question in Tea,,Female,,,,Native Speaker
-151,Question in Tea,Brian Smith,Male,PhD,Young,,Native Speaker
-152,Question in Tea,,Male,,,,Native Speaker
-153,Tessutivo: Contextual Interactions on Interactive Fabrics with Inductive Sensing,Jun Gong,Male,Grad Student,Young,eZPGCbsEdwA,Asian Non-Native
-154,Question in Tessutivo,,Male,,,,Asian Non-Native
-155,Question in Tessutivo,,Male,,,,Asian Non-Native
-156,The Memory Palace,Sauvik Das,Male,Grad Student,Young,,Native Speaker
-157,Question in The Memory Palace,Katharina Reinecke,Female,PhD,Intermediate,,Europ. Non-Native
-158,Question in The Memory Palace,,Male,,,,Asian Non-Native
-159,TilePoP: Tile-type Pop-up Prop for Virtual Reality,Shan-Yuan Teng,Male,Grad Student,Young,4-9oFh5UPTg,Asian Non-Native
-160,Question in TilePoP,,Male,,,,Native Speaker
-161,Question in TilePoP,,Male,,,,Asian Non-Native
-162,Tip-Tap: Battery-free Discrete 2D Fingertip Input,Keiko Katsuragawa,Female,PhD,Intermediate,BvYxCGRa6vE,Asian Non-Native
-163,Question in Tip-Tap,,Male,,,,Europ. Non-Native
-164,Question in Tip-Tap,,Female,,,,Native Speaker
-165,Question in Tip-Tap,,Male,,,,Native Speaker
-166,TipText: Eyes-Free Text Entry on a Fingertip Keyboard,Zheer Xu,Male,Grad Student,Young,e4-tANkReyw,Asian Non-Native
-167,Question in TipText,,Male,,,,Asian Non-Native
-168,Question in TipText,,Female,,,,Native Speaker
-169,Turn-by-Wire: Computationally Mediated Physical Fabrication,Rundong Tian,Male,Grad Student,Young,YjM8LOiDYyg,Native Speaker
-170,Question in Turn-by-Wire,,Male,,,,Europ. Non-Native
-171,Question in Turn-by-Wire,,Female,,,,Asian Non-Native
-172,Question in Turn-by-Wire,,Female,,,,Native Speaker
-173,"Type, Then Correct: Intelligent Text Correction Techniques for Mobile Text Entry Using NN",Mingrui „Ray“ Zhang,Male,Grad Student,Young,ZgrugZf8jrc,Asian Non-Native
-174,"Question in Type, Then Correct",Michel Beaudouin-Lafon,Male,PhD,Old,,Europ. Non-Native
-175,Unakite: Scaffolding Developers' Decision-Making Using the Web,Michael Xieyang Liu,Male,Grad Student,Young,UMQ-kWgmbQ4,Native Speaker
-176,Question in Unakite,,Male,,,,Native Speaker
-177,Question in Unakite,,Male,,,,Asian Non-Native
-178,"Videostrates: Collaborative, Distributed and Programmable Video Manipulation",Clemens N. Klokmose,Male,PhD,Intermediate,JmvkjdyL1cw,Europ. Non-Native
-179,Question in Videostrates,,Male,,,,Asian Non-Native
-180,Question in Videostrates,,Male,,,,Asian Non-Native
-181,View-Dependent Video Textures for 360° Video,Sean J. Liu,Female,Grad Student,Young,O_sjsowuS8c,Native Speaker
-182,Question in View-Dependent Video Textures,Michel Beaudouin-Lafon,Male,PhD,Old,,Europ. Non-Native
-183,Virtual Muscle Force: Communicating Kinesthetic Forces Through Pseudo-Haptic Feedback and Muscle Input,Gabriel Haas,Male,PhD,Young,,Europ. Non-Native
-184,Question in Virtual Muscle Force,,Male,,,,Native Speaker
-185,Question in Virtual Muscle Force,,Female,,,,Native Speaker
-186,Question in Virtual Muscle Force,,Male,,,,Asian Non-Native
-187,Question in Virtual Muscle Force,,Male,,,,Europ. Non-Native
-188,X-Droid: A Quick and Easy Android Prorotyping Framework with a Single-App Illusion,Donghwi Kim,Male,Grad Student,Young,cBdCYs3egqY,Asian Non-Native
-189,Question in X-Droid,Toby Jia-Jun Li,Male,Grad Student,Young,,Asian Non-Native
-190,Question in X-Droid,,Male,,,,Native Speaker
-191,Question in X-Droid,,Female,,,,Native Speaker
+ID,VideoTitle,Name,Sex,Academic Status,VideoID,IsNativeSpeaker
+0,3D printed Fabric: Techniques for Design and 3D Weaving Programmable Textiles,Haruki Takahashi,Male,PhD,z07keSZOkO8,Asian Non-Native
+1,Question in 3D printed Fabric Techniques,,Female,,,Native Speaker
+2,Question in 3D printed Fabric Techniques,,Female,,,Native Speaker
+3,A 3D Printer Head as a Robotic Manipulator,Shohei Katakura,Male,Grad Student,xNOvZbEyRAc,Asian Non-Native
+4,Question in 3D Printer Head as Robotic Manipulator,,Male,,,Native Speaker
+5,Accurate and Low-Latency Sensing of Touch Contact on Any Surface,Yizheng Gu,Male,Grad Student,xsN4XRrcftU,Asian Non-Native
+6,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,,Asian Non-Native
+7,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,Daniel Vogel,Male,PhD,,Native Speaker
+8,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,,Native Speaker
+9,Question in Accurate and Low Latency Sensing of Touch Contact on Any Surface,,Male,,,Asian Non-Native
+10,Aero-Plane: Handheld Force-Feedback Device that Renders weight Motion,Seungwoo Je,Male,Grad Student,ZlaXB0N3JFU,Asian Non-Native
+11,Aero-Plane: Handheld Force-Feedback Device that Renders weight Motion,Myung Jim Kim,Male,Grad Student,,-
+12,Question in Aero-Plane,Sean Follmer,Male,PhD,,Native Speaker
+13,Question in Aero-Plane,,Male,,,Native Speaker
+14,Bespoke: Interactively Synthesizing Custom GUIs from Command-Line Applications,Priyan Vaithilingam,Male,Grad Student,ceXqyyAzXIE,Asian Non-Native
+15,Question in Bespoke,,Male,,,Asian Non-Native
+16,Question in Bespoke,,Male,,,Europ. Non-Native
+17,Question in Bespoke,,Male,,,Native Speaker
+18,Question in Bespoke,Michel Beaudouin-Lafon,Male,PhD,,Europ. Non-Native
+19,Bodystorming Human-Robot Interactions,David Porfirio,Male,Grad Student,bxrN6dW5lH8,Native Speaker
+20,Question in Bodystorming Human-Robot Interactions,,Male,,,Native Speaker
+21,BubBowl: Display Vessel Using Electrolysis Bubbles in Drinkable Beverages,Ayaka Ishii,Female,Grad Student,Lrkl8XP9BSQ,Asian Non-Native
+22,Question in BubBowl,,Female,,,Native Speaker
+23,Question in BubBowl,,Male,,,Native Speaker
+24,CapstanCrunch: A Haptic VR Controller,Mike Sinclair,Male,PhD,fyVofcglIFE,Native Speaker
+25,Question in CapstanCrunch,,Male,,,Native Speaker
+26,Question in CapstanCrunch,,Male,,,Native Speaker
+27,Question in CapstanCrunch,,Male,,,Asian Non-Native
+28,CAVRN: An Exploration and Evaluation of Collective Audience VR Nexus Experience,Sebastian Herscher,Male,Grad Student,B9nytffmgWI,Native Speaker
+29,Question in CAVRN,,Male,,,Asian Non-Native
+30,Question in CAVRN,Daniel Leithinger,Male,PhD,,Europ. Non-Native
+31,CircuitStyle: A System for Peripherally Reinforcing Best Pracitces in HW Computing,Josh Urban Davis,Male,Grad Student,MqhK5Bo0ljI,Native Speaker
+32,Question in CircuitStyle,,Female,,,Native Speaker
+33,Question in CircuitStyle,,Female,,,Native Speaker
+34,Question in CircuitStyle,David (Ledo?),Male,Grad Student,,Native Speaker
+35,Context-Aware Online Adaptation of Mixed Reality Interfaces,David Lindlbauer,Male,PhD,SammTUw96Mg,Europ. Non-Native
+36,Question in Context-Aware Online Adaptation,,Male,,,Native Speaker
+37,Question in Context-Aware Online Adaptation,,Male,,,Native Speaker
+38,Designing AR Visualizations to Facilitate Stair Navigation for People with Low Vision,Yuhang Zhao,Female,Grad Student,r5ul6gzak3A,Asian Non-Native
+39,Question in Stair Navigation,,Male,,,Native Speaker
+40,Question in Stair Navigation,,Male,,,Asian Non-Native
+41,Question in Stair Navigation,,Female,,,Native Speaker
+42,DreamWalker: Substituting Real-World Walking Experiences with a VR,Jackie Yang,Male,Grad Student,B9887Q4BCAo,Asian Non-Native
+43,Question in DreamWalker,,Male,,,Asian Non-Native
+44,Question in DreamWalker,,Male,,,Asian Non-Native
+45,Drift-Correction Techniques for Scale-Adaptive VR Navigation,Roberto Montano-Murillo,Male,PhD,piqFtVCURQs,Europ. Non-Native
+46,Question in Drift-Correction,,Male,,,Native Speaker
+47,ElastImpact: 2.5D Multilevel Instant Impact Using Elasticity on HMD,Hsin-Ruey Tsai (Ray),Male,PhD,x77sVdE6axk,Asian Non-Native
+48,Question in ElasImpact,,Male,,,Native Speaker
+49,FaceWidgets: Exploring Tangible Interaction on Face with HMD,Wen-Jie Tseng,Male,Grad Student,kZwG6Ah9lek,Asian Non-Native
+50,Question in FaceWidgets,,Male,,,Native Speaker
+51,Gaze-Assisted Typing for Smart Glasses,Sunggeun Ahn,Male,Grad Student,6sRlLxeA,Asian Non-Native
+52,Question in Gaze-Assisted Typing,Jacob O. Wobbrock,Male,PhD,,Native Speaker
+53,Question in Gaze-Assisted Typing,,Male,,,Native Speaker
+54,GesturePod: Enabling On-Device Gesture-based Interaction for White Cane Users,Shishir Patil,Male,Grad Student,N4Og10qWMZ8,Asian Non-Native
+55,Question in GesturePod,,Male,,,Native Speaker
+56,Question in GesturePod,,Male,,,Asian Non-Native
+57,Question in GesturePod,,Male,,,Asian Non-Native
+58,GhostAR: A Time-space Editor for Embodied Authring of Human-Robot Collaborative...,Yuanzhi Cao,Male,Grad Student,,Asian Non-Native
+59,Question in GhostAR,,Male,,,Native Speaker
+60,HairBrush for Immersive Data-Driven Hair Modeling,Yajie Zhao,Female,PhD,Z-6FQz2DZjw,Asian Non-Native
+61,Question in HairBrush,,Male,,,Asian Non-Native
+62,Question in HairBrush,,Male,,,Native Speaker
+63,HapSense: A Soft Haptic I/O Device with Uninterrupted Dual Functionalities of Force...,Sang Ho Yoon,Male,PhD,O3i3IaMdbXg,Asian Non-Native
+64,Question in HapSense,,Male,,,Asian Non-Native
+65,Question in HapSense,,Female,,,Native Speaker
+66,Interactive 360 Degree Glasses – Free Tabletop 3D Display,Motohiro Makiguchi,Male,PhD,fjFLKKjVlnY,Asian Non-Native
+67,Question in Interactive 360 Degree Glasses,,Male,,,Native Speaker
+68,Is this Real?: Generating Synthetic Data that Looks Real,Miro Mannino,Male,PhD,,Asian Non-Native
+69,Question in Is this Real?,,Male,,,Native Speaker
+70,KnitPicking Textures: Programming and Modifying Complex Knitted Textures...,Megan Hofman,Female,Grad Student,khAtDAeu,Native Speaker
+71,Question in KnitPicking,,Male,,,Native Speaker
+72,Question in KnitPicking,,Male,,,Native Speaker
+73,Question in KnitPicking,,Female,,,Native Speaker
+74,Knitting Skeletons: Computer-Aided Design Tool for Shaping and Patterning of Knitted Garments,Alexandre Kaspar,Male,Grad Student,1A86wyP7hsk,Europ. Non-Native
+75,Question in Knitting Skeletons,,Female,,,Native Speaker
+76,LabelAR: A Spatial Guidance Interface for Fast Computer Vision Image Collection,Michael Laielli,Male,Grad Student,3zEYHrdp4,Native Speaker
+77,Question in LabelAR,,Male,,,Asian Non-Native
+78,Learning Cooperative Personalized Policies from Gaze Data,Christoph Gebhardt,Male,Grad Student,Mi2Ne3YRStk,Europ. Non-Native
+79,Question in Learning Cooperative,,Male,,,Native Speaker
+80,LEVIProps: Animating Levitated Optimized Fabric Structures using Holographic..,Rafael Morales,Male,PhD,4Y5C8AZZd80,Europ. Non-Native
+81,Question in LEVIProps,Lining Yao,Female,PhD,,Asian Non-Native
+82,LightAnchors: Appropriating Point Lights for Spatially-Anchored AR Interfaces,Karan Ahuja,Male,Grad Student,mf2fy-Om23g,Asian Non-Native
+83,Question in LightAnchors,,Male,,,Native Speaker
+84,Question in LightAnchors,,Male,,,Native Speaker
+85,Question in LightAnchors,,Male,,,Asian Non-Native
+86,Loki: Facilitating Remote Instruction of Physical Tasks Using Bi-Directional MR Telepresence,Bala Thoravi Kumaravel,Male,Grad Student,urGqP7FHpOE,Asian Non-Native
+87,Question in Loki,,Male,,,Europ. Non-Native
+88,Question in Loki,,Male,,,Asian Non-Native
+89,Magical Hands: Mid-Air Hand Gestures for Animating in VR,Rahul Arora,Male,Grad Student,fIHhm7Vrgwo,Asian Non-Native
+90,Question in Magical Hands,,Male,,,Asian Non-Native
+91,Mallard: Turn the Web into a Contextualized Prototyping Environment for ML,Xiong Zhang,Male,Grad Student,kZwG6Ah9lek,Asian Non-Native
+92,Question in Mallard,,Male,,,Native Speaker
+93,"Mantis: A Scalable, Lightweight and accessible Architecture to Build Multiform Force Feedback...",Gareth Barnaby,Male,Grad Student,wm2j9xQOWIU,Native Speaker
+94,Question in Mantis,,Male,,,Native Speaker
+95,Question in Mantis,,Male,,,Europ. Non-Native
+96,Morphlour: Personalized Flour-based Morphing Food Induced by Dehydration..,Humphrey Yang,Male,Grad Student,8CrUvqvVQHI,Asian Non-Native
+97,Question in Morphlour,,Male,,,Native Speaker
+98,Question in Morphlour,,Male,,,Asian Non-Native
+99,Optimizing Portrait Lighting at Capture-Time Using a 360 Camera as a Light Probe,Jane E,Female,Grad Student,W3miw6cYp80,Native Speaker
+100,Question in Optimizing Portrait Lighting,Scott Klemmer,Male,PhD,,Native Speaker
+101,Question in Optimizing Portrait Lighting,,Male,,,Asian Non-Native
+102,Proxino: Enabling Prototyping of Virtual Circuits with Physical Proxies,Te-Yen Wu,Male,Grad Student,_Klvg8YSrJQ,Asian Non-Native
+103,Question in Proxino,Andrea Bianchi,Male,PhD,,Europ. Non-Native
+104,Question in Proxino,,Female,,,Native Speaker
+105,"PseudoBend: Producing Haptic Illusions of Stretching, Bending and Twisting Using Grain Vibrations",Seongkook Heo,Male,PhD,rCYeWPUcMZU,Asian Non-Native
+106,Question in PseudoBend,,Male,,,Europ. Non-Native
+107,Question in PseudoBend,,Female,,,Native Speaker
+108,Question in PseudoBend,,Male,,,Europ. Non-Native
+109,Pull-Ups: Enhancing Suspension Activities in VR with Body-Scale Kinesthetic Force Feedbacks for VR,Liwei Chen,Male,PhD,F8yPlAL9_BU,Asian Non-Native
+110,Question in Pull-Ups,,Male,,,Asian Non-Native
+111,Question in Pull-Ups,,Male,,,Native Speaker
+112,Question in Pull-Ups,,Female,,,Asian Non-Native
+113,Question in Pull-Ups,,Male,,,Native Speaker
+114,PUMICE: Multi-Modal Agent that Learns Concepts and Conditionals from Natural Language and Demonstrations,Toby Jia-Jun Li,Male,Grad Student,KSFZ0paxbxc,Asian Non-Native
+115,Question in PUMICE,,Male,,,Asian Non-Native
+116,Question in PUMICE,,Male,,,Asian Non-Native
+117,Self-healing UI,Koya Narumi,Male,Grad Student,3sKCUjWk3NE,Asian Non-Native
+118,Self-healing UI,,Female,Grad Student,,Asian Non-Native
+119,Question in Self-healing UI,,Male,,,Native Speaker
+120,Question in Self-healing UI,,Male,,,Native Speaker
+121,Question in Self-healing UI,,Female,,,Native Speaker
+122,SensorSnaps: Integrating Wireless Sensor Nodes into Fabric Snap Fasteners for Textile Interfaces,Artem Dementyev,Male,Grad Student,9AOl7TXT2i4,Europ. Non-Native
+123,Question in SensorSnaps,,Female,,,Native Speaker
+124,ShapeBots: Shape changing swarm robots,Ryo Suzuki,Male,Grad Student,2QCEZ7Okzyw,Asian Non-Native
+125,Question in ShapeBots,,Male,,,Asian Non-Native
+126,Sketchforme: Composing Sketched Scenes from Text Descriptions for Interactive Applications,Forrest Huang,Male,Grad Student,h1dl4ZQwqaw,Native Speaker
+127,Question in Sketchforme,,Male,,,Asian Non-Native
+128,Question in Sketchforme,,Male,,,Native Speaker
+129,Skin-On Interfaces: Bio-Driven Approach for Artificial Skin Design to Cover Interactive Devices,Marc Teyssier,Male,Grad Student,kGzY99HWeME,Europ. Non-Native
+130,Question in Skin-On,,Female,,,Asian Non-Native
+131,Question in Skin-On,,Male,,,Europ. Non-Native
+132,Soft Inkjet Circuits,Arshad Khan,Male,PhD,zLGvlKquKO4,Asian Non-Native
+133,Question in Soft Inkjet Circuits,,Male,,,Asian Non-Native
+134,Sozu: Self-Powered Radio Tags for Building-Scale Activity Sensing,Yang Zhang,Male,Grad Student,Lv2MH517b1I,Asian Non-Native
+135,Question in Sozu,,Male,,,Europ. Non-Native
+136,Question in Sozu,,Male,,,Native Speaker
+137,Question in Sozu,,Male,,,Asian Non-Native
+138,Supporting Elder Connectedness through Cognitively Sustainable Design...,Rebecca Kleinberger,Female,Grad Student,8nlgZhhRUOs,Europ. Non-Native
+139,Question in Supporting Elder Connectedness,,Male,,,Asian Non-Native
+140,Question in Supporting Elder Connectedness,,Male,,,Native Speaker
+141,Question in Supporting Elder Connectedness,,Male,,,Native Speaker
+142,Question in Supporting Elder Connectedness,,Male,,,Asian Non-Native
+143,SWISH: Shifting-Weight Interface of Simulated Hydrodynamics,Shahabedin Sagheb,Male,PhD,29Vj3UMnp6o,Asian Non-Native
+144,Question in SWISH,,Male,,,Native Speaker
+145,Question in SWISH,,Male,,,Native Speaker
+146,Question in SWISH,,Male,,,Europ. Non-Native
+147,Tactlets: Adding Tactile Feedback to 3D Objects Using Custom Printed Controls,Daniel Gröger,Male,Grad Student,RvsVMF7dYLs,Europ. Non-Native
+148,Question in Tactlets,,Female,,,Native Speaker
+149,Tea: A High-Level Language and Runtime System for Automating Statistical Analysis,Eunice Jun,Female,Grad Student,BpYP7U7y77s,Native Speaker
+150,Question in Tea,,Female,,,Native Speaker
+151,Question in Tea,Brian Smith,Male,PhD,,Native Speaker
+152,Question in Tea,,Male,,,Native Speaker
+153,Tessutivo: Contextual Interactions on Interactive Fabrics with Inductive Sensing,Jun Gong,Male,Grad Student,eZPGCbsEdwA,Asian Non-Native
+154,Question in Tessutivo,,Male,,,Asian Non-Native
+155,Question in Tessutivo,,Male,,,Asian Non-Native
+156,The Memory Palace,Sauvik Das,Male,Grad Student,,Native Speaker
+157,Question in The Memory Palace,Katharina Reinecke,Female,PhD,,Europ. Non-Native
+158,Question in The Memory Palace,,Male,,,Asian Non-Native
+159,TilePoP: Tile-type Pop-up Prop for Virtual Reality,Shan-Yuan Teng,Male,Grad Student,4-9oFh5UPTg,Asian Non-Native
+160,Question in TilePoP,,Male,,,Native Speaker
+161,Question in TilePoP,,Male,,,Asian Non-Native
+162,Tip-Tap: Battery-free Discrete 2D Fingertip Input,Keiko Katsuragawa,Female,PhD,BvYxCGRa6vE,Asian Non-Native
+163,Question in Tip-Tap,,Male,,,Europ. Non-Native
+164,Question in Tip-Tap,,Female,,,Native Speaker
+165,Question in Tip-Tap,,Male,,,Native Speaker
+166,TipText: Eyes-Free Text Entry on a Fingertip Keyboard,Zheer Xu,Male,Grad Student,e4-tANkReyw,Asian Non-Native
+167,Question in TipText,,Male,,,Asian Non-Native
+168,Question in TipText,,Female,,,Native Speaker
+169,Turn-by-Wire: Computationally Mediated Physical Fabrication,Rundong Tian,Male,Grad Student,YjM8LOiDYyg,Native Speaker
+170,Question in Turn-by-Wire,,Male,,,Europ. Non-Native
+171,Question in Turn-by-Wire,,Female,,,Asian Non-Native
+172,Question in Turn-by-Wire,,Female,,,Native Speaker
+173,"Type, Then Correct: Intelligent Text Correction Techniques for Mobile Text Entry Using NN",Mingrui „Ray“ Zhang,Male,Grad Student,ZgrugZf8jrc,Asian Non-Native
+174,"Question in Type, Then Correct",Michel Beaudouin-Lafon,Male,PhD,,Europ. Non-Native
+175,Unakite: Scaffolding Developers' Decision-Making Using the Web,Michael Xieyang Liu,Male,Grad Student,UMQ-kWgmbQ4,Native Speaker
+176,Question in Unakite,,Male,,,Native Speaker
+177,Question in Unakite,,Male,,,Asian Non-Native
+178,"Videostrates: Collaborative, Distributed and Programmable Video Manipulation",Clemens N. Klokmose,Male,PhD,JmvkjdyL1cw,Europ. Non-Native
+179,Question in Videostrates,,Male,,,Asian Non-Native
+180,Question in Videostrates,,Male,,,Asian Non-Native
+181,View-Dependent Video Textures for 360° Video,Sean J. Liu,Female,Grad Student,O_sjsowuS8c,Native Speaker
+182,Question in View-Dependent Video Textures,Michel Beaudouin-Lafon,Male,PhD,,Europ. Non-Native
+183,Virtual Muscle Force: Communicating Kinesthetic Forces Through Pseudo-Haptic Feedback and Muscle Input,Gabriel Haas,Male,PhD,,Europ. Non-Native
+184,Question in Virtual Muscle Force,,Male,,,Native Speaker
+185,Question in Virtual Muscle Force,,Female,,,Native Speaker
+186,Question in Virtual Muscle Force,,Male,,,Asian Non-Native
+187,Question in Virtual Muscle Force,,Male,,,Europ. Non-Native
+188,X-Droid: A Quick and Easy Android Prorotyping Framework with a Single-App Illusion,Donghwi Kim,Male,Grad Student,cBdCYs3egqY,Asian Non-Native
+189,Question in X-Droid,Toby Jia-Jun Li,Male,Grad Student,,Asian Non-Native
+190,Question in X-Droid,,Male,,,Native Speaker
+191,Question in X-Droid,,Female,,,Native Speaker
+192,23 Ways to Nudge: Review of Technology-Mediated Nudging in HCI,Ana Caraban,Female,Grad Student,-U3Bo7KR108,Europ. Non-Native
+193,Question in 23 Ways to Nudge,,Male,,,Native Speaker
+194,Question in 23 Ways to Nudge,,Female,,,Asian Non-Native
+195,Question in 23 Ways to Nudge,,Male,,,Europ. Non-Native
+196,Question in 23 Ways to Nudge,,Male,,,Native Speaker
+197,"A Badge, Not a Barrier: Designing for- and Trhoughout Digital Badge Implementation",Caroline Pitt,Female,Grad Student,HxMSkH5ZpZI,Native Speaker
+198,"Question in Badge, not a Barrier",,Male, ,,Europ. Non-Native
+199,"Question in Badge, not a Barrier",,Male,,,Native Speaker
+200,A Change of Perspective: Designing Automated vehicle as New Social Actor in Public Space,Lenja Sorokin,Female,PhD,SmnSU4QceSk,Europ. Non-Native
+201,Question in Change of Perspective,,Male,,,Europ. Non-Native
+202,Question in Change of Perspective,,Female,,,Native Speaker
+203,A Design Space for Gaze Interaction on HMD,Teresa Hirzle,Female,Grad Student,91VMIz6MAZ8,Europ. Non-Native
+204,Question in Design Space for Gaze Interaction on HMD,,Male,,,Native Speaker
+205,Question in Design Space for Gaze Interaction on HMD,,Male,,,Native Speaker
+206,Question in Design Space for Gaze Interaction on HMD,,Male,,,Native Speaker
+207,Analyzing Value Discovery in Design Decisions Through Ethicography,Sai Shruthi Chivukula,Female,Grad Student,3lV3YQUvyyY,Asian Non-Native
+208,Question in Analyzing Value Discovery,,Female,,,Europ. Non-Native
+209,Question in Analyzing Value Discovery,,Male,,,Native Speaker
+210,Question in Analyzing Value Discovery,,Male,,,Europ. Non-Native
+211,Apprise: Supporting the Critical-Agency of Victims of Human Trafficking in Thailand,Hannah Thinyane,Female,Grad Student,VZSn47dkw8Y,Native Speaker
+212,Question in Apprise,,Male,,,Native Speaker
+213,Question in Apprise,,Male,,,Native Speaker
+214,Assisted Shifting of Electricity Use: Long Term Study of Managing Residential Heating,Rikke Hagensby Jensen,Female,PhD,giD37cbtetY,Europ. Non-Native
+215,Question in Assisted Shifting of Electricity Use,,Female,,,Native Speaker
+216,Question in Assisted Shifting of Electricity Use,,Male,,,Native Speaker
+217,Question in Assisted Shifting of Electricity Use,,Male,,,Native Speaker
+218,Question in Assisted Shifting of Electricity Use,,Male,,,Europ. Non-Native
+219,Augmenting Couples' Communication with Lifelines: Shared Timelines of Mixed Contextual Information,Carla F. Griggio,Female,,wFb8w7mPEsQ,Europ. Non-Native
+220,Question in Augmenting Couples' Communication,,Male,,,Europ. Non-Native
+221,Beyond Behaviour: The Coach's Perspective on Technology in Health Coaching,Heleen Rutjes,Female,Grad Student,oxorAXoEmf8,Europ. Non-Native
+222,Question in Beyond Behaviour,,Male,,,Native Speaker
+223,Bringing Shades of Feminism to Human Centered Computing,Neha Kumar,Female,PhD,SN7xUEYCKmU,Native Speaker
+224,Question in Bringing Shadeds of Feminism To HC Computing,,Female,,,Native Speaker
+225,Question in Bringing Shadeds of Feminism To HC Computing,,Male,,,Native Speaker
+226,Career Mentoring in Online Communities: Seeking and Receiving Advice from an Online Community,Maria Tomprou,Female,PhD,bP_XQz5v9Cc,Native Speaker
+227,Question in Career Mentoring,,Female,,,Native Speaker
+228,Question in Career Mentoring,,Male,,,Native Speaker
+229,Caring for Vincent: A Chatbot for Self-Comparison,Minha Lee,Female,Grad Student,AQZo1JpxkcA,Native Speaker
+230,Question in Caring for Vincent,,Female,,,Asian Non-Native
+231,Question in Caring for Vincent,,Male,,,Native Speaker
+232,Question in Caring for Vincent,,Female,,,Native Speaker
+233,Question in Caring for Vincent,,Male,,,Native Speaker
+234,Children's Reflection in Action with DIY,Silvia Torsi,Female,PhD,MvgGzZD-cQs,Europ. Non-Native
+235,Question in Children's Reflection in Action with DIY,,Female,,,Native Speaker
+236,Question in Children's Reflection in Action with DIY,,Female,,,Native Speaker
