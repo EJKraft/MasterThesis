@@ -11,13 +11,14 @@ import statsmodels.formula.api as smf
 def createMeanDataFrame(data, type, label):
 	r = []
 	for d in data:
-		d = dropCharacterCols(d)
+		if(type != 'Short'):
+			d = dropCharacterCols(d)
 		d = d.mean()
 		r.append(d)
 	if(type == 'Academic'):
 		 res = pd.DataFrame({'Grad Student': r[0], 'PhD': r[1]}, index = label)
-	elif(type == 'Age'):
-		res = pd.DataFrame({'Young': r[0], 'Intermediate': r[1], 'Old': r[2]}, index = label)
+	elif(type == 'Short'):
+		res = pd.DataFrame({'Short': r[0], 'Long': r[1]}, index = label)
 	elif(type == 'Sex'):
 		res = pd.DataFrame({'Male': r[0], 'Female': r[1]})
 	elif(type == 'IsNativeSpeaker'):
@@ -27,7 +28,7 @@ def createMeanDataFrame(data, type, label):
 	return res		
 
 def dropCharacterCols(data):
-	res = data.drop(['Char_ID','ID','Filename', 'Age', 'Sex', 'Academic Status', 'VideoTitle', 'Name', 'IsNativeSpeaker'], axis = 1)
+	res = data.drop(['Char_ID','ID','Filename', 'Sex', 'Academic Status', 'VideoTitle', 'Name', 'IsNativeSpeaker'], axis = 1)
 	return res
 	
 def cohen_d(data1, data2):
@@ -56,7 +57,7 @@ def correlation(data1, data2):
 
 def cleanData(data, column_name, column_value):
 	res = data.loc[data[column_name]==column_value]
-	res = res.drop(['ID','Char_ID','Filename', 'Age', 'Sex', 'Academic Status'], axis = 1)
+	res = res.drop(['ID','Char_ID','Filename',  'Sex', 'Academic Status'], axis = 1)
 	return res
 
 	#type = emotion, level of interest, affect
@@ -116,7 +117,7 @@ def chi2(data, labels, char_feature, shouldPrint = False):
 	residuals = []
 	for i in range(0,len(tables)):
 		# table += 5 has to be removed for final analysis, however, leaving this line of code out would result in an error bc there are 0 elements in the table
-		tables[i] += 5
+		#tables[i] += 5
 		chi2 = st.chi2_contingency(tables[i])
 		if(shouldPrint == True):
 			print('Chi square of ' + labels[i] + ' : ' + str(chi2[0]) + ' with p-value of: ' + str(chi2[1]))
@@ -193,7 +194,6 @@ def calcFrequencyTable(data, labels, char_feature):
 			row2 = binData(group2)
 			df_tab.loc['Male'] = row1
 			df_tab.loc['Female'] = row2
-
 		elif(char_feature == 'Academic'):
 			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Grad Student', 'PhD'] )
 			group1 = data.loc[data['Academic Status'] == 'Grad Student'][l]
@@ -202,17 +202,6 @@ def calcFrequencyTable(data, labels, char_feature):
 			row2 = binData(group2)
 			df_tab.loc['Grad Student'] = row1
 			df_tab.loc['PhD'] = row2
-		elif(char_feature == 'Age'):
-			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Young', 'Intermediate','Old'] )
-			group1 = data.loc[data['Age'] == 'Young'][l]
-			group2 = data.loc[data['Age'] == 'Intermediate'][l]
-			group3 = data.loc[data['Age'] == 'Old'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
-			row3 = binData(group3)
-			df_tab.loc['Young'] = row1
-			df_tab.loc['Intermediate'] = row2
-			df_tab.loc['Old'] = row3
 		elif(char_feature == 'IsNativeSpeaker'):
 			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Asian Non-Native', 'Europ. Non-Native','Native Speaker'] )
 			group1 = data.loc[data['IsNativeSpeaker'] == 'Asian Non-Native'][l]
@@ -224,7 +213,14 @@ def calcFrequencyTable(data, labels, char_feature):
 			df_tab.loc['Asian Non-Native'] = row1
 			df_tab.loc['Europ. Non-Native'] = row2
 			df_tab.loc['Native Speaker'] = row3
-
+		elif(char_feature == 'IsShort'):
+			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['True', 'False'] )
+			group1 = data.loc[data['IsShort'] == 'True'][l]
+			group2 = data.loc[data['IsShort'] == 'False'][l]
+			row1 = binData(group1)
+			row2 = binData(group2)
+			df_tab.loc['True'] = row1
+			df_tab.loc['False'] = row2
 		else:
 			print('Either use Sex, Academic or Age as KeyWord Arguments for char_feature!')
 			return
@@ -241,15 +237,15 @@ def logReg(data, voice_feature, char_feature, specificVoiceF):
 	
 def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	if(char_feature == 'Sex'):
-		d = data.drop(['Char_ID','ID','Name','VideoTitle', 'VideoID','Filename', 'Age', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID','ID','Name','VideoTitle', 'VideoID','Filename',  'Academic'], axis = 1)
 		d.Sex.replace({'Male': 0.0, 'Female':1.0}, inplace = True)
 	elif(char_feature == 'Academic'):
-		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoID','VideoTitle', 'Age', 'Sex'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoID','VideoTitle', 'Sex'], axis = 1)
 		d.Academic.replace({'Grad Student': 0.0, 'PhD': 1.0}, inplace = True)
-	elif(char_feature == 'Age'):
-		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoID','VideoTitle','Sex', 'Academic'], axis = 1)
+	elif(char_feature == 'IsShort'):
+		d = data.drop(['Char_ID', 'Filename'], axis = 1)
 	else:
-		print('Either use Sex, Academic or Age as input for character feature')
+		print('Either use Sex, Academic or IsShort as input for character feature')
 	
 	f = char_feature
 	
@@ -274,11 +270,9 @@ def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 def multiNomiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	
 	if(char_feature == 'Academic'):
-		d = data.drop(['Char_ID', 'ID', 'Filename', 'VideoID','Name', 'VideoTitle', 'Age','IsNativeSpeaker', 'Sex'], axis = 1)
-	elif(char_feature == 'Age'):
-		d = data.drop(['Char_ID', 'ID', 'Filename','VideoID', 'Name', 'VideoTitle','Sex', 'IsNativeSpeaker', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename', 'VideoID','Name', 'VideoTitle', 'IsNativeSpeaker', 'Sex'], axis = 1)
 	elif(char_feature == 'IsNativeSpeaker'):
-		d = data.drop(['Char_ID', 'ID', 'Filename','VideoID', 'Name', 'VideoTitle','Sex', 'Age', 'Academic'], axis = 1)
+		d = data.drop(['Char_ID', 'ID', 'Filename','VideoID', 'Name', 'VideoTitle','Sex', 'Academic'], axis = 1)
 	else:
 		print('Either use Sex, Academic or Age as input for character feature')
 		d = 0
@@ -310,11 +304,6 @@ def f_anova(data, labels, char_feature):
 			F, p = st.f_oneway(group1[feat], group2[feat])
 		elif(char_feature == 'Academical'):
 			data.Academic_Status.replace()
-		elif(char_feature == 'Age'):
-			group1 = data.loc[data['Age'] == 'Young']
-			group2 = data.loc[data['Age'] == 'Intermediate']
-			group3 = data.loc[data['Age'] == 'Old']			
-			F, p = st.f_oneway(group1[feat], group2[feat], group3[feat])
 		else:
 			print('Invalid Argument: Please enter either Sex, Academical or Age as char_feature!')
 			return
