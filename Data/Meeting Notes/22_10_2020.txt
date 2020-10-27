@@ -1,0 +1,4 @@
+Kruskal-Wallis's for differences in medians
+Dunn's multiple comparison with Bonferroni correction for post-hoc pairwise tests
+
+Shapiro-Wilks's and Levene's tests for normality and homoscedasticity
