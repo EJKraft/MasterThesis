@@ -1,0 +1,7 @@
+Model doesn't contain information for SVR probability inference
+SMILE-RESULT::ORIGIN=libsvm::TYPE=regression::COMPONENT=arousal::VIDX=0::NAME=arousal::VALUE=4.834725e-02
+Model doesn't contain information for SVR probability inference
+SMILE-RESULT::ORIGIN=libsvm::TYPE=regression::COMPONENT=valence::VIDX=0::NAME=valence::VALUE=2.448174e-02
+SMILE-RESULT::ORIGIN=libsvm::TYPE=classification::COMPONENT=emodbEmotion::VIDX=0::NAME=emodb_emotion::CATEGORY_IDX=6::CATEGORY=sadness::PROB=0;anger:0.000494::PROB=1;boredom:0.001486::PROB=2;disgust:0.008969::PROB=3;fear:0.000769::PROB=4;happiness:0.000694::PROB=5;neutral:0.000098::PROB=6;sadness:0.987489
+SMILE-RESULT::ORIGIN=libsvm::TYPE=classification::COMPONENT=abcAffect::VIDX=0::NAME=abc_affect::CATEGORY_IDX=1::CATEGORY=cheerful::PROB=0;agressiv:0.116783::PROB=1;cheerful:0.338658::PROB=2;intoxicated:0.120694::PROB=3;nervous:0.045437::PROB=4;neutral:0.049969::PROB=5;tired:0.328459
+SMILE-RESULT::ORIGIN=libsvm::TYPE=classification::COMPONENT=avicInterest::VIDX=0::NAME=interest::CATEGORY_IDX=1::CATEGORY=loi2::PROB=0;loi1:0.016146::PROB=1;loi2:0.504883::PROB=2;loi3:0.478970
