@@ -167,6 +167,32 @@ def displayANOVA(anova_res, label, type, char_type):
 	print('\n')
 	return
 	
+def kruskal_wallis(data, labels, char_feature, printRes = False):
+	tables = calcFrequencyTable(data, labels, char_feature)
+	results = []
+	for i in  range(0,len(tables)):
+		if(char_feature == 'Sex' or char_feature == 'Academic'):
+			group1 = tables[i].iloc[0]
+			group2 = tables[i].iloc[1]
+			res = st.kruskal(group1, group2)
+		elif(char_feature == 'IsNativeSpeaker'):
+			group1 = tables[i].iloc[0]
+			group2 = tables[i].iloc[1]
+			group3 = tables[i].iloc[2]
+			res = st.kruskal(group1, group2, group3)
+		else:
+			print('ERROR: Enter either Sex, Academic or IsNativeSpeaker as valid character features!')
+		if(printRes):
+			if(labels[i] == 'Anger' or labels[i] == 'Fear' or labels[i] == 'Tired'):
+				print(labels[i] + ': \t\t' + str(res))
+			else:
+				print(labels[i] + ': \t' + str(res))		
+		results.append(res)
+	return results
+			
+			
+			
+	
 def binData(data, quartiles):
 	count = np.zeros(4)
 	for i in data:
