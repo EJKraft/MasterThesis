@@ -18,9 +18,9 @@ Which folder contains which analysis?
 	5 seconds and 2 minutes, another data set containing results from 5 to 30 second audio files. Compares the
 	results from OpenSMILE regarding the effect of longer audio files on the result of the classification.
 
--General_Analysis_UIST_CHI_2019:
+-General_Analysis_CHI_2019:
 	Does not differ between questions, answers and sound files during presentation, but analyzes the whole dataset.
-	Analysis regarding Academic Status, Sex and Native Speaker. Plots, Logistic Regression, and Correlation (CHI2 and ANOVA not yet functional).
+	Analysis regarding Academic Status, Sex and Native Speaker. Plots, Logistic Regression, CHI2, Ruskal-Wallis and Correlation.
 
 -Notebooks_UIST2019/_short_samples:
 	Will be removed in future, since they are combined in analysis in folder 'comparing_short_vs_long_samples'.
