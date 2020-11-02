@@ -167,16 +167,42 @@ def displayANOVA(anova_res, label, type, char_type):
 	print('\n')
 	return
 	
-def binData(data):
+def kruskal_wallis(data, labels, char_feature, printRes = False):
+	tables = calcFrequencyTable(data, labels, char_feature)
+	results = []
+	for i in  range(0,len(tables)):
+		if(char_feature == 'Sex' or char_feature == 'Academic'):
+			group1 = tables[i].iloc[0]
+			group2 = tables[i].iloc[1]
+			res = st.kruskal(group1, group2)
+		elif(char_feature == 'IsNativeSpeaker'):
+			group1 = tables[i].iloc[0]
+			group2 = tables[i].iloc[1]
+			group3 = tables[i].iloc[2]
+			res = st.kruskal(group1, group2, group3)
+		else:
+			print('ERROR: Enter either Sex, Academic or IsNativeSpeaker as valid character features!')
+		if(printRes):
+			if(labels[i] == 'Anger' or labels[i] == 'Fear' or labels[i] == 'Tired'):
+				print(labels[i] + ': \t\t' + str(res))
+			else:
+				print(labels[i] + ': \t' + str(res))		
+		results.append(res)
+	return results
+			
+			
+			
+	
+def binData(data, quartiles):
 	count = np.zeros(4)
 	for i in data:
-		if(i <= 0.25):
+		if(i <= quartiles[0.25]):
 			count[0] +=1
-		elif(i <= 0.5 and i > 0.25):
+		elif(i <= quartiles[0.5] and i > quartiles[0.25]):
 			count[1]+=1
-		elif(i <= 0.75 and i > 0.5):
+		elif(i <= quartiles[0.75] and i > quartiles[0.5]):
 			count[2]+=1
-		elif(i <= 1.0 and i > 0.75):
+		elif(i > quartiles[0.75]):
 			count[3]+=1			
 	return count
 
@@ -185,12 +211,13 @@ def calcFrequencyTable(data, labels, char_feature):
 	tables = []
 	
 	for l in labels:
+		quarts = data[l].quantile([.25,.5,.75])
 		if(char_feature == 'Sex'):
 			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Male', 'Female'] )
 			group1 = data.loc[data['Sex'] == 'Male'][l]
 			group2 = data.loc[data['Sex'] == 'Female'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
 			df_tab.loc['Male'] = row1
 			df_tab.loc['Female'] = row2
 
@@ -198,8 +225,8 @@ def calcFrequencyTable(data, labels, char_feature):
 			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Grad Student', 'PhD'] )
 			group1 = data.loc[data['Academic Status'] == 'Grad Student'][l]
 			group2 = data.loc[data['Academic Status'] == 'PhD'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
 			df_tab.loc['Grad Student'] = row1
 			df_tab.loc['PhD'] = row2
 		elif(char_feature == 'IsNativeSpeaker'):
@@ -207,9 +234,9 @@ def calcFrequencyTable(data, labels, char_feature):
 			group1 = data.loc[data['IsNativeSpeaker'] == 'Asian Non-Native'][l]
 			group2 = data.loc[data['IsNativeSpeaker'] == 'Europ. Non-Native'][l]
 			group3 = data.loc[data['IsNativeSpeaker'] == 'Native Speaker'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
-			row3 = binData(group3)
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
+			row3 = binData(group3, quarts)
 			df_tab.loc['Asian Non-Native'] = row1
 			df_tab.loc['Europ. Non-Native'] = row2
 			df_tab.loc['Native Speaker'] = row3
