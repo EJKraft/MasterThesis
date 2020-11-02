@@ -168,25 +168,24 @@ def displayANOVA(anova_res, label, type, char_type):
 	return
 	
 def kruskal_wallis(data, labels, char_feature, printRes = False):
-	tables = calcFrequencyTable(data, labels, char_feature)
+	#tables = calcFrequencyTable(data, labels, char_feature)
 	results = []
-	for i in  range(0,len(tables)):
-		if(char_feature == 'Sex' or char_feature == 'Academic'):
-			group1 = tables[i].iloc[0]
-			group2 = tables[i].iloc[1]
+	for l in labels:
+		if(char_feature == 'Sex'):
+			group1 = data.loc[data[char_feature] == 'Male'][l]
+			group2 = data.loc[data[char_feature] == 'Female'][l]
 			res = st.kruskal(group1, group2)
-		elif(char_feature == 'IsNativeSpeaker'):
-			group1 = tables[i].iloc[0]
-			group2 = tables[i].iloc[1]
-			group3 = tables[i].iloc[2]
-			res = st.kruskal(group1, group2, group3)
+		elif(char_feature == 'Academic Status'):		
+			group1 = data.loc[data[char_feature] == 'Grad Student'][l]
+			group2 = data.loc[data[char_feature] == 'PhD'][l]
+			res = st.kruskal(group1, group2)
 		else:
-			print('ERROR: Enter either Sex, Academic or IsNativeSpeaker as valid character features!')
+			print('ERROR: Enter either Sex or Academic as valid character features!')
 		if(printRes):
-			if(labels[i] == 'Anger' or labels[i] == 'Fear' or labels[i] == 'Tired'):
-				print(labels[i] + ': \t\t' + str(res))
+			if(l == 'Anger' or l == 'Fear' or l == 'Tired'):
+				print(l + ': \t\t' + str(res))
 			else:
-				print(labels[i] + ': \t' + str(res))		
+				print(l + ': \t' + str(res))		
 		results.append(res)
 	return results
 			
