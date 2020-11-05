@@ -11,7 +11,7 @@ Which folder contains which analysis?
 	Analysis regarding Academic Status, Sex and Native Speaker. Plots, Logistic Regression, CHI2, Ruskal-Wallis and Correlation.
 
 -2_Comparing Answers:
-	Selects all files which are an answer given by the presenter. Analysis regarding Academic Status, 
+	Selects all files which are an answer given by the presenter during the Q&A session. Answer analysis regarding Academic Status, 
 	Sex and Native Speaker. Plots, Logistic Regression, CHI2, Kruskal-Wallis.
 
 -3_Comparing Questions:
