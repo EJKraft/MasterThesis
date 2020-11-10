@@ -24,7 +24,30 @@ def createMeanDataFrame(data, type, label):
 		res = pd.DataFrame({'Asian Non-Native': r[0], 'Europ. Non-Native': r[1], 'Native Speaker': r[2]}, index = label)
 	else:
 		res = 0
-	return res		
+	return res	
+
+def constructMedianDataFrame(data, label, ID):
+	person = data.loc[data['Char_ID'] == ID].copy()
+	count = person['Char_ID'].count()
+	med_l = []
+	if(count % 2 == 0):
+		for l in label:
+			l_med = 0.5 * person[l].iloc[int(count/2 - 1)] + 0.5 * person[l].iloc[int(count/2)]
+			med_l.append(l_med)
+		med = pd.Series(med_l, index = label)
+	else:
+		med = person[label].median()
+	for l in label:
+		data.loc[data.Char_ID == ID, l] = med[l]
+	return data
+	
+def constructMedianSeries(data):
+	count = data.count()
+	if(count % 2 == 0):
+		med = 0.5 * data.iloc[int(count/2 - 1)] + 0.5 * data.iloc[int(count/2)]
+	else:
+		med = data.median()
+	return med
 
 def dropCharacterCols(data):
 	res = data.drop(['Char_ID','ID','Filename', 'Sex', 'Academic Status', 'VideoTitle', 'Name', 'IsNativeSpeaker'], axis = 1)
