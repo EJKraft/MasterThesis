@@ -7,6 +7,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
+import time
+from statsmodels.stats.outliers_influence import variance_inflation_factor  
 
 def createMeanDataFrame(data, type, label):
 	r = []
@@ -52,6 +54,25 @@ def constructMedianSeries(data):
 def dropCharacterCols(data):
 	res = data.drop(['Char_ID','ID','Filename', 'Sex', 'Academic Status', 'VideoTitle', 'Name', 'IsNativeSpeaker'], axis = 1)
 	return res
+	
+#taken from https://stackoverflow.com/questions/48223443/how-to-run-a-multicollinearity-test-on-a-pandas-dataframe
+def calculate_vif(X, thresh=5.0):
+    variables = [X.columns[i] for i in range(X.shape[1])]
+    dropped=True
+    while dropped:
+        dropped=False
+        print(len(variables))
+        vif = [variance_inflation_factor(X[variables].values, ix) for ix in range(len(variables))]
+
+        maxloc = vif.index(max(vif))
+        if max(vif) > thresh:
+            print('Dropping \'' + X[variables].columns[maxloc] + '\' at index: ' + str(maxloc))
+            variables.pop(maxloc)
+            dropped=True
+
+    print('Remaining variables:')
+    print([variables])
+    return X[[i for i in variables]]
 	
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
