@@ -91,6 +91,7 @@ def correlations(dataset, data, label):
 		c = correlation(dataset, data[x])
 		cors.append(c)
 		d = cohen_d(dataset, data[x])
+		coh_d.append(d)
 	return [cors, coh_d]
 	
 def correlation(data1, data2):
@@ -112,6 +113,7 @@ def catPlot(data, type, char_feature, kind):
 	plt.subplots_adjust(top = 0.9)
 	g.fig.suptitle(kind + ' plot of OpenEAR: ' + type)
 	plt.xticks(rotation = 20)
+	plt.savefig("cat_" + str(type) + ".svg")
 	return
 	
 def boxPlots(data, char_feature, types):
@@ -126,6 +128,7 @@ def boxPlot(data, char_feature,type):
 	data_melt = meltData(data, char_feature,type)	
 	ax = sns.boxplot(x = type, y = 'Probability of ' + type, hue = char_feature, data = data_melt)
 	ax.set_title('Box Plot of OpenEAR: ' + type)
+	plt.savefig( "box_" + str(type) + ".svg")
 	return	
 
 def meltData(data, char_feature, type):
@@ -152,6 +155,7 @@ def distPlots(data, features, type):
 		plt.figure()
 		plt.title('Distribution of OpenEAR: ' + feat + ' ' + f)
 		sns.kdeplot(data[f], shade = True)
+		plt.savefig("dist_" + str(f) + ".svg")
 	return
 	
 def chi2(data, labels, char_feature, shouldPrint = False):
