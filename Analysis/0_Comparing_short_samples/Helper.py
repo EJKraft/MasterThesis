@@ -7,29 +7,73 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
+import time
+from math import sqrt
+from statsmodels.stats.outliers_influence import variance_inflation_factor  
 
 def createMeanDataFrame(data, type, label):
 	r = []
 	for d in data:
-		if(type != 'Short'):
-			d = dropCharacterCols(d)
+		d = dropCharacterCols(d)
 		d = d.mean()
 		r.append(d)
 	if(type == 'Academic'):
 		 res = pd.DataFrame({'Grad Student': r[0], 'PhD': r[1]}, index = label)
-	elif(type == 'Short'):
-		res = pd.DataFrame({'Short': r[0], 'Long': r[1]}, index = label)
+	elif(type == 'Age'):
+		res = pd.DataFrame({'Young': r[0], 'Intermediate': r[1], 'Old': r[2]}, index = label)
 	elif(type == 'Sex'):
 		res = pd.DataFrame({'Male': r[0], 'Female': r[1]})
 	elif(type == 'IsNativeSpeaker'):
 		res = pd.DataFrame({'Asian Non-Native': r[0], 'Europ. Non-Native': r[1], 'Native Speaker': r[2]}, index = label)
 	else:
 		res = 0
-	return res		
+	return res	
+
+def constructMedianDataFrame(data, label, ID):
+	person = data.loc[data['Char_ID'] == ID].copy()
+	count = person['Char_ID'].count()
+	med_l = []
+	if(count % 2 == 0):
+		for l in label:
+			l_med = 0.5 * person[l].iloc[int(count/2 - 1)] + 0.5 * person[l].iloc[int(count/2)]
+			med_l.append(l_med)
+		med = pd.Series(med_l, index = label)
+	else:
+		med = person[label].median()
+	for l in label:
+		data.loc[data.Char_ID == ID, l] = med[l]
+	return data
+	
+def constructMedianSeries(data):
+	count = data.count()
+	if(count % 2 == 0):
+		med = 0.5 * data.iloc[int(count/2 - 1)] + 0.5 * data.iloc[int(count/2)]
+	else:
+		med = data.median()
+	return med
 
 def dropCharacterCols(data):
 	res = data.drop(['Char_ID','ID','Filename', 'Sex', 'Academic Status', 'VideoTitle', 'Name', 'IsNativeSpeaker'], axis = 1)
 	return res
+	
+#taken from https://stackoverflow.com/questions/48223443/how-to-run-a-multicollinearity-test-on-a-pandas-dataframe
+def calculate_vif(X, thresh=5.0):
+    variables = [X.columns[i] for i in range(X.shape[1])]
+    dropped=True
+    while dropped:
+        dropped=False
+        print(len(variables))
+        vif = [variance_inflation_factor(X[variables].values, ix) for ix in range(len(variables))]
+
+        maxloc = vif.index(max(vif))
+        if max(vif) > thresh:
+            print('Dropping \'' + X[variables].columns[maxloc] + '\' at index: ' + str(maxloc))
+            variables.pop(maxloc)
+            dropped=True
+
+    print('Remaining variables:')
+    print([variables])
+    return X[[i for i in variables]]
 	
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
@@ -48,6 +92,7 @@ def correlations(dataset, data, label):
 		c = correlation(dataset, data[x])
 		cors.append(c)
 		d = cohen_d(dataset, data[x])
+		coh_d.append(d)
 	return [cors, coh_d]
 	
 def correlation(data1, data2):
@@ -69,6 +114,7 @@ def catPlot(data, type, char_feature, kind):
 	plt.subplots_adjust(top = 0.9)
 	g.fig.suptitle(kind + ' plot of OpenEAR: ' + type)
 	plt.xticks(rotation = 20)
+	plt.savefig("img/1_cat_" + str(type) + ".svg")
 	return
 	
 def boxPlots(data, char_feature, types):
@@ -83,6 +129,7 @@ def boxPlot(data, char_feature,type):
 	data_melt = meltData(data, char_feature,type)	
 	ax = sns.boxplot(x = type, y = 'Probability of ' + type, hue = char_feature, data = data_melt)
 	ax.set_title('Box Plot of OpenEAR: ' + type)
+	plt.savefig( "img/1_box_" + str(type) + ".svg")
 	return	
 
 def meltData(data, char_feature, type):
@@ -109,18 +156,26 @@ def distPlots(data, features, type):
 		plt.figure()
 		plt.title('Distribution of OpenEAR: ' + feat + ' ' + f)
 		sns.kdeplot(data[f], shade = True)
+		plt.savefig("img/1_dist_" + str(f) + ".svg")
 	return
+	
+#df is set to one, since we use it only for two groups ( df = min(r-1, c-1)), since r = 2 => df = 1
+#only exception would be for isNativeSpeaker
+def calcCramerV(chi2, num_samples, df = 1):
+	return sqrt(chi2 / (num_samples * df))
 	
 def chi2(data, labels, char_feature, shouldPrint = False):
 	tables = calcFrequencyTable(data, labels, char_feature)
 	chi2s = []
 	residuals = []
+	n_samples = 540 #For case Long vs short samples
 	for i in range(0,len(tables)):
 		# table += 5 has to be removed for final analysis, however, leaving this line of code out would result in an error bc there are 0 elements in the table
 		#tables[i] += 5
 		chi2 = st.chi2_contingency(tables[i])
 		if(shouldPrint == True):
 			print('Chi square of ' + labels[i] + ' : ' + str(chi2[0]) + ' with p-value of: ' + str(chi2[1]))
+			print('Cramers V: ' + str(calcCramerV(chi2[0], n_samples)))
 		table = sm.stats.Table(tables[i])
 		residual = table.standardized_resids
 		chi2s.append(chi2)
@@ -168,16 +223,41 @@ def displayANOVA(anova_res, label, type, char_type):
 	print('\n')
 	return
 	
-def binData(data):
+def kruskal_wallis(data, labels, char_feature, printRes = False):
+	#tables = calcFrequencyTable(data, labels, char_feature)
+	results = []
+	for l in labels:
+		if(char_feature == 'Sex'):
+			group1 = data.loc[data[char_feature] == 'Male'][l]
+			group2 = data.loc[data[char_feature] == 'Female'][l]
+			res = st.kruskal(group1, group2)
+		elif(char_feature == 'Academic Status'):		
+			group1 = data.loc[data[char_feature] == 'Grad Student'][l]
+			group2 = data.loc[data[char_feature] == 'PhD'][l]
+			res = st.kruskal(group1, group2)
+		else:
+			print('ERROR: Enter either Sex or Academic as valid character features!')
+		if(printRes):
+			if(l == 'Anger' or l == 'Fear' or l == 'Tired'):
+				print(l + ': \t\t' + str(res))
+			else:
+				print(l + ': \t' + str(res))		
+		results.append(res)
+	return results
+			
+			
+			
+	
+def binData(data, quartiles):
 	count = np.zeros(4)
 	for i in data:
-		if(i <= 0.25):
+		if(i <= quartiles[0.25]):
 			count[0] +=1
-		elif(i <= 0.5 and i > 0.25):
+		elif(i <= quartiles[0.5] and i > quartiles[0.25]):
 			count[1]+=1
-		elif(i <= 0.75 and i > 0.5):
+		elif(i <= quartiles[0.75] and i > quartiles[0.5]):
 			count[2]+=1
-		elif(i <= 1.0 and i > 0.75):
+		elif(i > quartiles[0.75]):
 			count[3]+=1			
 	return count
 
@@ -186,20 +266,22 @@ def calcFrequencyTable(data, labels, char_feature):
 	tables = []
 	
 	for l in labels:
+		quarts = data[l].quantile([.25,.5,.75])
 		if(char_feature == 'Sex'):
 			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Male', 'Female'] )
 			group1 = data.loc[data['Sex'] == 'Male'][l]
 			group2 = data.loc[data['Sex'] == 'Female'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
 			df_tab.loc['Male'] = row1
 			df_tab.loc['Female'] = row2
+
 		elif(char_feature == 'Academic'):
 			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Grad Student', 'PhD'] )
 			group1 = data.loc[data['Academic Status'] == 'Grad Student'][l]
 			group2 = data.loc[data['Academic Status'] == 'PhD'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
 			df_tab.loc['Grad Student'] = row1
 			df_tab.loc['PhD'] = row2
 		elif(char_feature == 'IsNativeSpeaker'):
@@ -207,20 +289,20 @@ def calcFrequencyTable(data, labels, char_feature):
 			group1 = data.loc[data['IsNativeSpeaker'] == 'Asian Non-Native'][l]
 			group2 = data.loc[data['IsNativeSpeaker'] == 'Europ. Non-Native'][l]
 			group3 = data.loc[data['IsNativeSpeaker'] == 'Native Speaker'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
-			row3 = binData(group3)
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
+			row3 = binData(group3, quarts)
 			df_tab.loc['Asian Non-Native'] = row1
 			df_tab.loc['Europ. Non-Native'] = row2
 			df_tab.loc['Native Speaker'] = row3
 		elif(char_feature == 'IsShort'):
-			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['True', 'False'] )
-			group1 = data.loc[data['IsShort'] == 'True'][l]
-			group2 = data.loc[data['IsShort'] == 'False'][l]
-			row1 = binData(group1)
-			row2 = binData(group2)
-			df_tab.loc['True'] = row1
-			df_tab.loc['False'] = row2
+			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Long', 'Short'] )
+			group1 = data.loc[data['IsShort'] == 'False'][l]
+			group2 = data.loc[data['IsShort'] == 'True'][l]
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
+			df_tab.loc['Long'] = row1
+			df_tab.loc['Short'] = row2
 		else:
 			print('Either use Sex, Academic or Age as KeyWord Arguments for char_feature!')
 			return
@@ -242,10 +324,8 @@ def multiLogReg(data, voice_feature, char_feature, prohibitWarning = False):
 	elif(char_feature == 'Academic'):
 		d = data.drop(['Char_ID', 'ID', 'Filename', 'Name', 'VideoID','VideoTitle', 'Sex'], axis = 1)
 		d.Academic.replace({'Grad Student': 0.0, 'PhD': 1.0}, inplace = True)
-	elif(char_feature == 'IsShort'):
-		d = data.drop(['Char_ID', 'Filename'], axis = 1)
 	else:
-		print('Either use Sex, Academic or IsShort as input for character feature')
+		print('Either use Sex, Academic or Age as input for character feature')
 	
 	f = char_feature
 	

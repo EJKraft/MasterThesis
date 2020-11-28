@@ -7,6 +7,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
+import time
+from math import sqrt
+from statsmodels.stats.outliers_influence import variance_inflation_factor  
 
 def createMeanDataFrame(data, type, label):
 	r = []
@@ -53,6 +56,25 @@ def dropCharacterCols(data):
 	res = data.drop(['Char_ID','ID','Filename', 'Sex', 'Academic Status', 'VideoTitle', 'Name', 'IsNativeSpeaker'], axis = 1)
 	return res
 	
+#taken from https://stackoverflow.com/questions/48223443/how-to-run-a-multicollinearity-test-on-a-pandas-dataframe
+def calculate_vif(X, thresh=5.0):
+    variables = [X.columns[i] for i in range(X.shape[1])]
+    dropped=True
+    while dropped:
+        dropped=False
+        print(len(variables))
+        vif = [variance_inflation_factor(X[variables].values, ix) for ix in range(len(variables))]
+
+        maxloc = vif.index(max(vif))
+        if max(vif) > thresh:
+            print('Dropping \'' + X[variables].columns[maxloc] + '\' at index: ' + str(maxloc))
+            variables.pop(maxloc)
+            dropped=True
+
+    print('Remaining variables:')
+    print([variables])
+    return X[[i for i in variables]]
+	
 def cohen_d(data1, data2):
 	n1, n2 = len(data1), len(data2)
 	dof = n1 + n2 - 2
@@ -70,6 +92,7 @@ def correlations(dataset, data, label):
 		c = correlation(dataset, data[x])
 		cors.append(c)
 		d = cohen_d(dataset, data[x])
+		coh_d.append(d)
 	return [cors, coh_d]
 	
 def correlation(data1, data2):
@@ -91,6 +114,7 @@ def catPlot(data, type, char_feature, kind):
 	plt.subplots_adjust(top = 0.9)
 	g.fig.suptitle(kind + ' plot of OpenEAR: ' + type)
 	plt.xticks(rotation = 20)
+	plt.savefig("img/1_cat_" + str(type) + ".svg")
 	return
 	
 def boxPlots(data, char_feature, types):
@@ -105,6 +129,7 @@ def boxPlot(data, char_feature,type):
 	data_melt = meltData(data, char_feature,type)	
 	ax = sns.boxplot(x = type, y = 'Probability of ' + type, hue = char_feature, data = data_melt)
 	ax.set_title('Box Plot of OpenEAR: ' + type)
+	plt.savefig( "img/1_box_" + str(type) + ".svg")
 	return	
 
 def meltData(data, char_feature, type):
@@ -131,18 +156,26 @@ def distPlots(data, features, type):
 		plt.figure()
 		plt.title('Distribution of OpenEAR: ' + feat + ' ' + f)
 		sns.kdeplot(data[f], shade = True)
+		plt.savefig("img/1_dist_" + str(f) + ".svg")
 	return
+	
+#df is set to one, since we use it only for two groups ( df = min(r-1, c-1)), since r = 2 => df = 1
+#only exception would be for isNativeSpeaker
+def calcCramerV(chi2, num_samples, df = 1):
+	return sqrt(chi2 / (num_samples * df))
 	
 def chi2(data, labels, char_feature, shouldPrint = False):
 	tables = calcFrequencyTable(data, labels, char_feature)
 	chi2s = []
 	residuals = []
+	n_samples = 190 #For case Long vs short samples
 	for i in range(0,len(tables)):
 		# table += 5 has to be removed for final analysis, however, leaving this line of code out would result in an error bc there are 0 elements in the table
 		#tables[i] += 5
 		chi2 = st.chi2_contingency(tables[i])
 		if(shouldPrint == True):
 			print('Chi square of ' + labels[i] + ' : ' + str(chi2[0]) + ' with p-value of: ' + str(chi2[1]))
+			print('Cramers V: ' + str(calcCramerV(chi2[0], n_samples)))
 		table = sm.stats.Table(tables[i])
 		residual = table.standardized_resids
 		chi2s.append(chi2)
@@ -262,7 +295,14 @@ def calcFrequencyTable(data, labels, char_feature):
 			df_tab.loc['Asian Non-Native'] = row1
 			df_tab.loc['Europ. Non-Native'] = row2
 			df_tab.loc['Native Speaker'] = row3
-
+		elif(char_feature == 'IsShort'):
+			df_tab = pd.DataFrame(columns = ['1st Quartile', '2nd Quartile', '3rd Quartile', '4th Quartile'], index = ['Long', 'Short'] )
+			group1 = data.loc[data['IsShort'] == 'False'][l]
+			group2 = data.loc[data['IsShort'] == 'True'][l]
+			row1 = binData(group1, quarts)
+			row2 = binData(group2, quarts)
+			df_tab.loc['Long'] = row1
+			df_tab.loc['Short'] = row2
 		else:
 			print('Either use Sex, Academic or Age as KeyWord Arguments for char_feature!')
 			return
