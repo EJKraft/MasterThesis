@@ -168,7 +168,7 @@ def chi2(data, labels, char_feature, shouldPrint = False):
 	tables = calcFrequencyTable(data, labels, char_feature)
 	chi2s = []
 	residuals = []
-	n_samples = 81 #For case Long vs short samples
+	n_samples = len(data) #For case Long vs short samples
 	for i in range(0,len(tables)):
 		# table += 5 has to be removed for final analysis, however, leaving this line of code out would result in an error bc there are 0 elements in the table
 		#tables[i] += 5
@@ -226,6 +226,7 @@ def displayANOVA(anova_res, label, type, char_type):
 def kruskal_wallis(data, labels, char_feature, printRes = False):
 	#tables = calcFrequencyTable(data, labels, char_feature)
 	results = []
+	etas = []
 	for l in labels:
 		if(char_feature == 'Sex'):
 			group1 = data.loc[data[char_feature] == 'Male'][l]
@@ -235,17 +236,25 @@ def kruskal_wallis(data, labels, char_feature, printRes = False):
 			group1 = data.loc[data[char_feature] == 'Grad Student'][l]
 			group2 = data.loc[data[char_feature] == 'PhD'][l]
 			res = st.kruskal(group1, group2)
+		elif(char_feature == 'IsShort'):
+			group1 = data.loc[data[char_feature] == 'True'][l]
+			group2 = data.loc[data[char_feature] == 'False'][l]
+			res = st.kruskal(group1,group2)
 		else:
 			print('ERROR: Enter either Sex or Academic as valid character features!')
+		eta = eta_square(res[0], len(data))
 		if(printRes):
 			if(l == 'Anger' or l == 'Fear' or l == 'Tired'):
-				print(l + ': \t\t' + str(res))
+				print(l + ': \t\t' + str(res))				
 			else:
-				print(l + ': \t' + str(res))		
+				print(l + ': \t' + str(res))
+			print('Eta²: ' + str(eta))
 		results.append(res)
-	return results
+		etas.append(eta)
+	return [results, etas]
 			
-			
+def eta_square(H, n, k = 2):
+	return (H - k + 1)/(n - k)
 			
 	
 def binData(data, quartiles):
