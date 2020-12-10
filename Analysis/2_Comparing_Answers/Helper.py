@@ -114,7 +114,7 @@ def catPlot(data, type, char_feature, kind):
 	plt.subplots_adjust(top = 0.9)
 	g.fig.suptitle(kind + ' plot of OpenEAR: ' + type)
 	plt.xticks(rotation = 20)
-	plt.savefig("img/1_cat_" + str(type) + ".svg")
+	plt.savefig("img/2_cat_" + str(type) + "_" + str(char_feature) + ".svg")
 	return
 	
 def boxPlots(data, char_feature, types):
@@ -129,7 +129,7 @@ def boxPlot(data, char_feature,type):
 	data_melt = meltData(data, char_feature,type)	
 	ax = sns.boxplot(x = type, y = 'Probability of ' + type, hue = char_feature, data = data_melt)
 	ax.set_title('Box Plot of OpenEAR: ' + type)
-	plt.savefig( "img/1_box_" + str(type) + ".svg")
+	plt.savefig( "img/2_box_" + str(type) + "_" + str(char_feature) + ".svg")
 	return	
 
 def meltData(data, char_feature, type):
@@ -156,7 +156,7 @@ def distPlots(data, features, type):
 		plt.figure()
 		plt.title('Distribution of OpenEAR: ' + feat + ' ' + f)
 		sns.kdeplot(data[f], shade = True)
-		plt.savefig("img/1_dist_" + str(f) + ".svg")
+		plt.savefig("img/2_dist_" + str(f) + ".svg")
 	return
 	
 #df is set to one, since we use it only for two groups ( df = min(r-1, c-1)), since r = 2 => df = 1

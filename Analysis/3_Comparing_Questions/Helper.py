@@ -114,11 +114,11 @@ def catPlot(data, type, char_feature, kind):
 	plt.subplots_adjust(top = 0.9)
 	g.fig.suptitle(kind + ' plot of OpenEAR: ' + type)
 	plt.xticks(rotation = 20)
-	plt.savefig("img/1_cat_" + str(type) + ".svg")
+	plt.savefig("img/3_cat_" + str(type) + "_" + str(char_feature) + ".svg")
 	return
 	
 def boxPlots(data, char_feature, types):
-	for i in range(0,3):
+	for i in range(0,len(data)):
 		plt.xticks(rotation=20)
 		boxPlot(data[i], char_feature, types[i])
 		plt.figure()
@@ -126,10 +126,14 @@ def boxPlots(data, char_feature, types):
 	return
 	
 def boxPlot(data, char_feature,type):
-	data_melt = meltData(data, char_feature,type)	
-	ax = sns.boxplot(x = type, y = 'Probability of ' + type, hue = char_feature, data = data_melt)
+	data_melt = meltData(data, char_feature,type)
+	if(type == 'Arousal Valence'):
+		y_label = 'Values of Arousal Valence'
+	else:
+		y_label = 'Probability of ' + type
+	ax = sns.boxplot(x = type, y = y_label, hue = char_feature, data = data_melt)
 	ax.set_title('Box Plot of OpenEAR: ' + type)
-	plt.savefig( "img/1_box_" + str(type) + ".svg")
+	plt.savefig( "img/3_box_" + str(type) +"_" + str(char_feature) + ".svg")
 	return	
 
 def meltData(data, char_feature, type):
@@ -139,7 +143,11 @@ def meltData(data, char_feature, type):
 		data_melt = data[char_feature].replace({0.0: "Bachelor", 1.0: "Master"}, inplace = True)
 	elif(char_feature == 'Age'):
 		data_melt = data[char_feature].replace({23: "Young", 24: "Middle", 25: "Old"}, inplace = True)
-	data_melt = data.melt(var_name = type, value_name = 'Probability of ' + type, id_vars = char_feature)
+	if type == 'Arousal Valence':
+		val_name = 'Values of Arousal Valence'
+	else:
+		val_name = 'Probability of ' + type
+	data_melt = data.melt(var_name = type, value_name = val_name, id_vars = char_feature)
 	return data_melt
 	
 def distPlots(data, features, type):
@@ -156,7 +164,7 @@ def distPlots(data, features, type):
 		plt.figure()
 		plt.title('Distribution of OpenEAR: ' + feat + ' ' + f)
 		sns.kdeplot(data[f], shade = True)
-		plt.savefig("img/1_dist_" + str(f) + ".svg")
+		plt.savefig("img/3_dist_" + str(f) + ".svg")
 	return
 	
 #df is set to one, since we use it only for two groups ( df = min(r-1, c-1)), since r = 2 => df = 1
